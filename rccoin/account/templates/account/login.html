@@ -42,7 +42,10 @@
         .alert-danger, .alert-success, div.float-left {
             font-size: 13px;
         }
-    }
+        .row {
+            display: block;
+            margin: 0 0 0 0;
+        }
 {% endblock css %}
 
 {% block body %}
@@ -51,9 +54,9 @@
         <div class="row justify-content-center h-100">
             <div class="row w-768 card-wrapper">
                 <div class="col-md d-none d-md-block">
-                    <img src="{% static 'img/rccoin.png' %}" class="shadow" style="border-radius: 5px;">
+                    <img src="{% static 'img/rccoin.png' %}" style="border-radius: 5px;">
                 </div>
-                <div class="col-md card fat shadow">
+                <div class="col-md card fat">
                     <div class="card-body">
                         <h4 class="card-title">| 로그인</h4>
                         <hr style="margin-bottom: 30px;">

@@ -7,9 +7,6 @@ function setSelectForYear() {
         let option = `<option value="${year}">${year}</option>`
         $("#birth_year").append(option)
     }
-    if ( myYear ) {
-        $("#birth_year").val(myYear).prop("selected", true)
-    }
 }
 
 function setSelectForMonth() {
@@ -18,9 +15,6 @@ function setSelectForMonth() {
         let option = `<option value="${month}">${month}</option>`
         $("#birth_month").append(option)
     }
-    if ( myMonth ) {
-        $("#birth_month").val(myMonth).prop("selected", true)
-    }
 }
 
 function setSelectForDate() {
@@ -28,17 +22,6 @@ function setSelectForDate() {
     for ( let month = 1; month <= 31; month++ ) {
         let option = `<option value="${month}">${month}</option>`
         $("#birth_date").append(option)
-    }
-    if( myDate ) {
-        $("#birth_date").val(myDate).prop("selected", true)
-    }
-}
-
-function selectGender() {
-    let myGender = $("#_gender").val()
-    if ( myGender ) {
-        $("#gender").val(myGender).prop("selected", true)
-        isSignup = false
     }
 }
 
@@ -100,13 +83,10 @@ function chk_email() {
     if ( email.length < 1 ) {
         msg = "이메일을 입력해주세요."
     } else if ( email.match(regex) == null ) {
-        console.log("#1");
         msg = "이메일 형식이 잘못되었습니다."
     } else {
-        console.log("#2");
         return true
     }
-    console.log("#3");
     alert(msg)
     return false
 }
@@ -128,7 +108,6 @@ $(function () {
     setSelectForYear()
     setSelectForMonth()
     setSelectForDate()
-    selectGender()
     
     $("#username").on("change", function() {
         id_isValidated = false

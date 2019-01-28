@@ -26,6 +26,8 @@ urlpatterns = [
     path('agreement/', views.agreement, name='agreement'),
     path('chk_username/', views.chk_username),
     path('signup/', views.signup, name='signup'),
-    path('info/<int:u_id>/', views.get_myinfo, name='info'),
-    path('edit/<int:u_id>/', views.account_edit, name='edit'),
+    path('info/', views.get_myinfo, name='info'),
+    path('identity/', views.identity, name='identity'),
+    path('edit/', views.account_edit, name='edit'),
+    path('chg_pwd/', views.change_pwd, name='chg_pwd'),
 ]

@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout, update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -127,24 +127,54 @@ def signup(request):
     else:
         return render(request, 'account/signup.html', {})
 
-# 정보수정
-@login_required
-def account_edit(request, u_id):
-    logined_u_id = request.user.pk
-    if u_id == logined_u_id:
-        return render(request, 'account/account_edit.html', {})
-    else:
-        # 잘못된 접근
-        return render(request, 'index.html', {})
-
 # 계정정보 획득
 @login_required
-def get_myinfo(request, u_id):
-    logined_u_id = request.user.pk
-    if u_id == logined_u_id:
-        utype = ['가맹점회원', '일반회원', '관리자계정']
-        gender = ['남자', '여자']
-        return render(request, 'account/myinfo.html', {'utype': utype[request.user.profile.type - 1], 'gender': gender[request.user.profile.gender - 1]})
-    else:
-        # 잘못된 접근
-        return render(request, 'index.html', {})
+def get_myinfo(request):
+    utype = ['가맹점회원', '일반회원', '관리자계정']
+    gender = ['남자', '여자']
+    return render(request, 'account/myinfo.html', {'utype': utype[request.user.profile.type - 1], 'gender': gender[request.user.profile.gender - 1]})
+
+# 본인인증
+@login_required
+def identity(request):
+    if request.method == 'POST':
+        username = request.user.username
+        password = request.POST.get('password', None)
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            return render(request, 'account/account_edit.html', {})
+        else:
+            messages.error(request, '비밀번호가 일치하지 않습니다.')
+            return redirect('account:identity')
+    return render(request, 'account/identity.html', {})
+    
+# 정보수정
+@login_required
+def account_edit(request):
+    if request.method == 'POST':
+        user = get_object_or_404(Profile, user_id=request.user.pk)
+        user.gender = request.POST.get('gender', None)
+        user.birth_year = request.POST.get('birth_year', None)
+        user.birth_month = request.POST.get('birth_month', None)
+        user.birth_date = request.POST.get('birth_date', None)
+        user.save()
+        return redirect('account:info')
+    return render(request, 'account/account_edit.html', {})
+
+# 비밀번호 변경
+@login_required
+def change_pwd(request):
+    if request.method == 'POST':
+        user = get_object_or_404(User, pk=request.user.pk)
+        old_pwd = request.POST.get('password', None)
+        validated_pwd = authenticate(username=user.username, password=old_pwd)
+        if validated_pwd is not None:
+            new_pwd = request.POST.get('password1', None)
+            user.set_password(new_pwd)
+            user.save()
+            update_session_auth_hash(request, user)
+            return redirect('account:info')
+        else:
+            messages.error(request, '현재 비밀번호가 일치하지 않습니다.')
+            return redirect('account:chg_pwd')
+    return render(request, 'account/password_edit.html', {})

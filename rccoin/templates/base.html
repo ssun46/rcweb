@@ -44,6 +44,9 @@
             a.nav-link, li.nav-link {
                 font-size: 1rem;
             }
+            .navbar {
+                padding-bottom: 15px;
+            }
         }
         {% block css %} {% endblock css %}
     </style>
@@ -53,7 +56,7 @@
 <body>
   
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
          
             <a class="navbar-brand" href="{% url 'index' %}">
@@ -106,7 +109,7 @@
                             마이페이지
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{% url 'account:info' user.pk %}">계정관리</a>
+                            <a class="dropdown-item" href="{% url 'account:info' %}">계정관리</a>
                             <a class="dropdown-item" href="#">자전거타기</a>
                             <a class="dropdown-item" href="{% url 'account:logout' %}">로그아웃</a>
                         </div>
