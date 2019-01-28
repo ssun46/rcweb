@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load staticfiles %}
+{% endblock head %}
+
+{% block css %}
+    #contents {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    .form-group > label {
+        font-weight: 550;
+    }
+    h4.card-title {
+        color: #76c763;
+        font-weight: 550;
+    }
+    a.float-right, a.float-left {
+        font-size: 0.8rem;
+        color: #000;
+    }
+    .w-768 {
+        min-width: 700px;
+    }
+    .alert-danger {
+        color: red;
+        font-size: 15px;
+        background-color: #fef2f4;
+    }
+    .alert-success {
+        font-size: 15px;
+    }
+    div.float-left {
+        color: green;
+        font-size: 15px;
+        border: 0px;
+        padding: 3px 10px;
+    }
+    .font-black {
+        color: #000;
+    }
+    @media(max-width: 768px) {
+        form {
+            widht: 100%;
+
+        }
+        .w-768 {
+            min-width: 0px;
+        }
+        .alert-danger, .alert-success, div.float-left {
+            font-size: 13px;
+        }
+    }
+{% endblock css %}
+
+{% block body %}
+
+    <div id="contents" class="container">
+        <div class="row justify-content-center h-100">
+            <div class="row w-768 card-wrapper">
+                <div class="col-md d-none d-md-block">
+                    <img src="{% static 'img/rccoin.png' %}" class="shadow" style="border-radius: 5px;">
+                </div>
+                <div class="col-md card fat shadow">
+                    <div class="card-body">
+                        <h4 class="card-title">| 아이디 찾기</h4>
+                        <hr style="margin-bottom: 30px;">
+                        
+                        <!-- ID search form -->
+                        <form action="{% url 'account:forget_id' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="email">이메일주소</label>
+                                <div style="position:relative" id="eye-password-0">
+                                    <input id="email" type="email" class="form-control" name="email" autocomplete="off" required autofocus style="padding-right: 60px;" />
+                                </div>
+                                <div class="float-left">
+                                    이메일주소로 아이디를 검색합니다.
+                                </div>
+                            </div>
+                            
+                            <br>
+
+                            <div class="form-group m-0">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {% if message.tags == "error" %}
+                                            <div class="alert alert-danger">
+                                                <img src="{% static 'img/exclamation-mark.png' %}" style="width: 18px">&nbsp;{{ message }}
+                                            </div>
+                                        {% elif message.tags == "info" %}
+                                            <div class="alert alert-success">
+                                                <img src="{% static 'img/magnifying-glass.png' %}" style="width: 18px">&nbsp;{{ message }}
+                                                <a href="{% url 'account:forget_pwd' %}" class="float-right">비밀번호 찾기</a>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+
+                                <hr style="margin-top: 15px;"> 
+
+                                <button type="submit" class="btn btn-success btn-block">
+                                    Search
+                                </button>
+                            </div>
+                            <div class="mt-4 text-center">
+                                <a href="{% url 'account:login' %}" class="font-black">로그인</a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+{% block js %}
+{% endblock js %}
