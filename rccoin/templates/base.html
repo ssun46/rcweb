@@ -106,7 +106,7 @@
                             마이페이지
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">계정관리</a>
+                            <a class="dropdown-item" href="{% url 'account:info' user.pk %}">계정관리</a>
                             <a class="dropdown-item" href="#">자전거타기</a>
                             <a class="dropdown-item" href="{% url 'account:logout' %}">로그아웃</a>
                         </div>
