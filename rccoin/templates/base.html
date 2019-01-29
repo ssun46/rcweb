@@ -15,39 +15,10 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'bootstrap-4.2.1-dist/css/bootstrap.css' %}">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     
     <style>
-        a.nav-link, li.nav-link {
-            font-size: 1.2rem;
-            font-weight: 520;
-            margin-left: 5px;
-            margin-right: 5px;
-        }
-        .card-title > a > strong, p.card-text, .card-title > h5, .card-text > li > a {
-            color: #fff;
-        }
-        ul.card-text, .card-text > li {
-            list-style: none;
-            margin: 0px;
-            padding: 0px;
-        } 
-        a:hover, a:active, a:visited {
-            text-decoration: none;
-        }
-
-        @media (max-width: 576px) {
-            body {
-                font-size: 13px;
-            }
-        }
-        @media (max-width: 768px) {
-            a.nav-link, li.nav-link {
-                font-size: 1rem;
-            }
-            .navbar {
-                padding-bottom: 15px;
-            }
-        }
         {% block css %} {% endblock css %}
     </style>
 
@@ -60,7 +31,7 @@
         <div class="container">
          
             <a class="navbar-brand" href="{% url 'index' %}">
-                <img src="{% static 'img/logo.png' %}" height="70%">
+                <img src="{% static 'img/logo.png' %}" height="20%">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -104,14 +75,22 @@
                     <li class="nav-link d-none d-lg-block">|</li>
                     <div class="dropdown-divider"></div>
                     {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account:logout' %}">로그아웃</a>
+                    </il>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             마이페이지
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="{% url 'account:info' %}">계정관리</a>
+                            <a class="dropdown-item" href="#">계좌관리</a>
+                            {% if user.profile.type == 1 %}
+                            <a class="dropdown-item" href="{% url 'store:info' %}">가맹점관리</a>
+                            {% elif user.profile.type == 2 %}
+                            <a class="dropdown-item" href="{% url 'store:apply' %}">가맹점신청</a>
+                            {% endif %}
                             <a class="dropdown-item" href="#">자전거타기</a>
-                            <a class="dropdown-item" href="{% url 'account:logout' %}">로그아웃</a>
                         </div>
                     </li>
                     {% else %}

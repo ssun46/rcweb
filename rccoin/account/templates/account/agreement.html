@@ -5,107 +5,33 @@
 {% endblock head %}
 
 {% block css %}
-    #contents {
-        margin-top: 50px;
-        margin-bottom: 50px;
-    }
-    .form-group > label {
-        font-weight: 550;
-    }
-    h4.card-title {
-        color: #76c763;
-        font-weight: 550;
-    }
-    .agreement {
-        font-size: 0.8rem;
-        color: #000;
-    }
-    .w-m {
-        display: block;
-        width: 100%
-    }
-    .alert-danger {
-        color: red;
-        font-size: 15px;
-        background-color: #fef2f4;
-    }
-    .alert-success {
-        font-size: 15px;
-    }
-    div.float-left {
-        color: green;
-        font-size: 15px;
-        border: 0px;
-        padding: 3px 10px;
-    }
-    .font-black {
-        color: #000;
-    }
-    textarea.form-control {
-        height: 200px;
-        resize: none;
-    }
-    .chkbox[type=checkbox], .chkboxAll[type=checkbox] {
-        display: none;
-    }
-    .chkbox[type=checkbox] + label, .chkboxAll[type=checkbox] + label {
-        background: url(../../static/img/uncheck.png) no-repeat;
-        display: inline-block;
-        width: 82px;
-        height: 30px;
-        margin-right: 10px;
-        vertical-align: middle;
-        cursor: pointer;
-    }
-    .chkbox[type=checkbox]:checked + label, .chkboxAll[type=checkbox]:checked + label {
-        background: url(../../static/img/check.png) no-repeat;
-    }
-
-    @media(max-width: 768px) {
-        form {
-            widht: 100%;
-        }
-        .alert-danger, .alert-success, div.float-left {
-            font-size: 13px;
-        }
-        .chkbox[type=checkbox] + label, .chkboxAll[type=checkbox] + label {
-            width: 82px;
-            height: 30px;
-        }
-        .submitButton {
-            font-size: 13px;
-        }
-        div.h-100 {
-            margin: 0 0 0 0;
-        }
-    }
 {% endblock css %}
 
 {% block body %}
 
     <div id="contents" class="container">
-        <div class="row justify-content-center h-100">
-            <div class="row w-m card-wrapper">
-                <div class="col-md card fat">
+        <div class="row2 justify-content-center h-100">
+            <div class="row2 w-m card-wrapper">
+                <div class="col-md card fat noborder">
                     <div class="card-body" style="display: block;">
                         <h4 class="card-title">| 약관동의</h4>
                         <hr style="margin-bottom: 30px;">
                         
                         <!-- Accept terms -->
                         <div class="form-group">
-                            <label for="agreement1">* 개인정보 수집·이용</label>
+                            <label for="agreement1">* 개인정보 수집·이용<sup class="text-danger">(필수)</sup></label>
                             <textarea id="agreement1" class="form-control" name="agreement1" readonly>{{ agreement1 }}</textarea>
                         </div>
                         <div class="text-right">
-                            <input type="checkbox" id="chk_agree1" class="chkbox" /><label for="chk_agree1" class="agreement">&nbsp;동의(필수)</label>
+                            <input type="checkbox" id="chk_agree1" class="chkbox" /><label for="chk_agree1" class="agreement">&nbsp;동의</label>
                         </div>
 
                         <div class="form-group">
-                            <label for="agreement2">* 개인정보 처리 동침</label>
+                            <label for="agreement2">* 개인정보 처리 동침<sup class="text-danger">(필수)</sup></label>
                             <textarea id="agreement2" class="form-control" name="agreement2" readonly>{{ agreement2 }}</textarea>
                         </div>
                         <div class="text-right">
-                            <input type="checkbox" id="chk_agree2" class="chkbox" /><label for="chk_agree2" class="agreement">&nbsp;동의(필수)</label>
+                            <input type="checkbox" id="chk_agree2" class="chkbox" /><label for="chk_agree2" class="agreement">&nbsp;동의</label>
                         </div>
                     
                         <div class="text-right">    
@@ -114,7 +40,7 @@
                         
                         <hr>
 
-                        <div class="row justify-content-center">
+                        <div class="row2 justify-content-center">
                             <a href="{% url 'account:signup' %}" id="btn_submit" class="btn btn-success">확인</a>&nbsp;
                             <a href="{% url 'index' %}" class="btn btn-secondary">취소</a>
                         </div>

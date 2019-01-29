@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load staticfiles %}
+{% endblock head %}
+
+{% block css %}
+strong {
+    font-size: 17px;
+    font-weight: 800;
+    margin-left: 5px;
+}
+small {
+    color: #8a8a8b;
+    font-size: 17px;
+}
+.profile-usertitle-name {
+    font-size: 25px;
+}
+.personal-details {
+    color: #4d4e4f;
+    margin-top: 10px;
+}
+.profile-img {
+    text-align: center;
+}
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    display: block;
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+}
+
+/* Media */
+
+/* col-sm */
+@media (max-width: 540px) {
+    small {
+        font-size: 15px;
+    }
+}
+/* col-md */
+@media (max-width: 768px) {
+    .profile-usertitle-name {
+        margin-top: 10px;        
+    }
+}
+/* col-lg */
+@media (max-width: 960px) {
+}
+/* col-xl */
+@media (max-width: 1200px) {
+}
+{% endblock css %}
+
+{% block body %}
+
+    <div id="contents" class="container">
+        <div class="row2 justify-content-center h-100">
+            <div class="row2 w-m card-wrapper">
+                <div class="col-md card fat noborder">
+                    <div class="card-body" style="display: block;">
+                        <h4 class="card-title">| 가맹점 관리</h4>
+                        <hr style="margin-bottom: 30px;">
+                    
+                        <!-- MyStore info -->
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="profile-img">
+                                    <img src="/media/{{ photo.image }}" class="img-responsive" alt="">
+                                </div>
+                                
+                                <hr>
+
+                                <div class="row2 justify-content-center">
+                                    <a href="{% url 'store:edit' %}" class="btn btn-success" style="margin: 0px 5px 0px 5px;">수정</a> 
+                                    <a href="{% url 'store:delete' s_id=store.pk %}" class="btn btn-danger" style="margin: 0px 5px 0px 5px;">삭제</a>
+                                    {% if store.status == 2 %}
+                                    <a href="{% url 'store:qrcode' %}" class="btn btn-warning" style="margin: 0px 5px 0px 5px;">QR 코드</a>
+                                    {% endif %}
+                                </div>
+
+                                <hr class="d-block d-sm-none">
+                            </div>
+
+                            <div class="col-md-9">
+                                <div class="name-wrapper">
+                                    <div class="profile-usertitle-name">{{ store.name }}</div>
+                                    <div class="profile-usertitle-job">(사업자등록번호) {{ store.corporate_number }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>등록업종</small>
+                                            <strong>{{ domain }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>등록지역</small>
+                                            <strong>{{ loc }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>영업시간</small>
+                                            <strong>{{ store.opening_hour }}:{{ store.opening_minute }}-{{ store.closing_hour }}:{{ store.closing_minute }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>홈페이지</small>
+                                            <strong>{{ store.url }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>연락처</small>
+                                            <strong>{{ store.phone_number }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>승인상태</small>
+                                            <strong>{{ status }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="personal-details">
+                                            <small>주소</small>
+                                            <strong>{{ store.address }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>등록일</small>
+                                            <strong>{{ rdate }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>수정일</small>
+                                            <strong>{{ mdate }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+                    
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+{% block js %}
+{% endblock js %}

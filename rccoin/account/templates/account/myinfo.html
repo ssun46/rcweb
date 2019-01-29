@@ -5,123 +5,6 @@
 {% endblock head %}
 
 {% block css %}
-    #contents {
-        margin-top: 50px;
-        margin-bottom: 50px;
-    }
-    .form-group > label {
-        font-weight: 550;
-    }
-    h4.card-title {
-        color: #76c763;
-        font-weight: 550;
-    }
-    a.float-right, a.float-left {
-        font-size: 0.8rem;
-        color: #000;
-    }
-    .w-768 {
-        min-width: 700px;
-    }
-    .alert-danger {
-        color: red;
-        font-size: 15px;
-        background-color: #fef2f4;
-    }
-    .font-black {
-        color: #000;
-    }
-    .info {
-        font-size: 13px;
-        color: #007bff;
-    }
-
-    /* Profile container */
-    .profile {
-        margin: 20px 0;
-    }
-
-    /* Profile sidebar */
-    .profile-sidebar {
-        padding: 7% 0 7% 0;
-        background: #fff;
-    }
-
-    .profile-userpic img {
-        float: none;
-        margin: 0 auto;
-        width: 50%;
-        height: 50%;
-        -webkit-border-radius: 50% !important;
-        -moz-border-radius: 50% !important;
-        border-radius: 50% !important;
-    }
-    .profile-usertitle {
-        text-align: center;
-    }
-    .profile-usertitle-name {
-        color: #5a7391;
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 7px;
-    }
-    .profile-usertitle-job {
-        text-transform: uppercase;
-        color: #5b9bd1;
-        font-size: 15px;
-        font-weight: 600;
-        margin-bottom: 15px;
-    }
-    .profile-userbuttons {
-        text-align: center;
-        margin-top: 10px;
-    }
-    .profile-userbuttons .btn {
-        text-transform: uppercase;
-        font-size: 15px;
-        font-weight: 600;
-        padding: 6px 15px;
-        margin-right: 5px;
-    }
-    .profile-userbuttons .btn:last-child {
-        margin-right: 0px;
-    }
-    ul.nav {
-        margin: 0 20px 0 20px;
-    }
-    .profile-usermenu {
-        display: block;
-        margin-top: 30px;
-    }
-    .profile-usermenu ul li {
-        color: #5b9bd1;
-        font-size: 15px;
-        font-weight: 600;
-        padding-left: 10px;
-        padding-right: 10px;
-        margin-bottom: 15px;
-    }
-    
-    /* Profile Content */
-    .profile-content {
-        padding: 20px;
-        background: #fff;
-        min-height: 460px;
-    }
-
-    @media(max-width: 768px) {
-        form {
-            widht: 100%;
-
-        }
-        .w-768 {
-            min-width: 0px;
-        }
-        .row {
-            display: block;
-            margin: 0 0 0 0;
-        }
-    }
 {% endblock css %}
 
 {% block body %}
@@ -135,7 +18,7 @@
                 <div class="col-md card fat">
                     <div class="card-body">
                         <h4 class="card-title">| 계정정보</h4>
-                        <hr style="margin-bottom: 30px;">
+                        <hr>
                         
                         <!-- MyInfo -->
                         <div class="profile-sidebar">
@@ -143,7 +26,7 @@
                                 <div class="profile-usertitle-name">
                                     {{ user.username }}
                                 </div>
-                                <div class="profile-usertitle-job">
+                                <div class="profile-usertitle-job" style="margin-bottom: 30px;">
                                     {{ utype }}
                                 </div>
                             </div>

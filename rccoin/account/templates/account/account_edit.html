@@ -5,52 +5,13 @@
 {% endblock head %}
 
 {% block css %}
-    #contents {
-        margin-top: 50px;
-        margin-bottom: 50px;
-    }
-    .form-group > label {
-        font-weight: 550;
-    }
-    h4.card-title {
-        color: #76c763;
-        font-weight: 550;
-    }
-    a.float-right, a.float-left {
-        font-size: 0.8rem;
-        color: #000;
-    }
-    .w-768 {
-        min-width: 700px;
-    }
-    .alert-danger {
-        color: red;
-        font-size: 15px;
-        background-color: #fef2f4;
-    }
-    .font-black {
-        color: #000;
-    }
-    .info {
-        font-size: 13px;
-        color: #007bff;
-    }
-    @media(max-width: 768px) {
-        form {
-            widht: 100%;
-
-        }
-        .w-768 {
-            min-width: 0px;
-        }
-    }
 {% endblock css %}
 
 {% block body %}
 
     <div id="contents" class="container">
         <div class="row justify-content-center h-100">
-            <div class="w-768 card fat">
+            <div class="w-768 card fat noborder">
                 <div class="card-body">
                     <h4 class="card-title">| 정보수정</h4>
                     <hr style="margin-bottom: 30px;">
@@ -115,7 +76,7 @@
  
                         <hr style="margin-top: 30px;"> 
 
-                        <div class="row justify-content-center">
+                        <div class="row2 justify-content-center">
                             <input type="submit" class="btn btn-success" value="수정" />&nbsp;
                             <a href="{% url 'account:info' %}" class="btn btn-secondary">취소</a>
                         </div>
