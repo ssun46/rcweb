@@ -4,12 +4,16 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
-import json, docxpy
+from time import sleep
+import json, docxpy, datetime, requests
 
 from .models import Profile
 
 # Create your views here.
+
+host = 'http://210.107.78.166:3000/'
 
 # 로그인
 def login(request):
@@ -110,19 +114,59 @@ def chk_username(request):
     return HttpResponse(json_data, content_type="application/json;charset=UTF-8")
 
 # 회원가입
+@csrf_exempt
 def signup(request):
     if request.method == 'POST':
-        user = User()
-        user.username = request.POST.get('username', None)
-        user.set_password(request.POST.get('password1', None))
-        user.email = request.POST.get('email', None)
-        user.gender = request.POST.get('gender', None)
-        user.birth_year = request.POST.get('birth_year', None)
-        user.birth_month = request.POST.get('birth_month', None)
-        user.birth_date = request.POST.get('birth_date', None)
-        user.type = 2
-        user.status = 1
-        user.save()
+        key = request.POST.get('username', None)
+        if key:
+            # 계좌 생성
+            today = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
+            headers = {'Content-Type': 'application/json; charset=utf-8'}
+            url = host + 'init_wallet'
+            data = {
+                'user_id' : key,
+                'from_id' : 'admin',
+                'date' : today
+            }
+            param_data = { 'param_data' : json.dumps(data) }
+            response = requests.post(url, params=param_data, headers=headers)
+            msg = response.json()
+            if msg['result'] == 'fail':
+                messages.error(request, '회원가입에 실패했습니다. 관리자에게 문의하세요.')
+            else:
+                try:
+                    get_object_or_404(User, email=request.POST.get('email', None))
+                except:
+                    sleep(2)
+                    # 3000 rc 발행
+                    today = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
+                    headers = {'Content-Type': 'application/json; charset=utf-8'}
+                    url = host + 'publish'
+                    data = {
+                        'user_id'   : key, 
+                        'from_id'   : 'admin',
+                        'amount'    : '3000',
+                        'date'      : today
+                    }
+                    param_data = { 'param_data' : json.dumps(data) }
+                    response = requests.post(url, params=param_data, headers=headers)
+                    msg = response.json()
+                    if msg['result'] == 'success':
+                        messages.info(request, '첫 방문기념 3000RC가 지급되었습니다.')
+                    pass
+
+                user = User()
+                user.username = request.POST.get('username', None)
+                user.set_password(request.POST.get('password1', None))
+                user.email = request.POST.get('email', None)
+                user.gender = request.POST.get('gender', None)
+                user.birth_year = request.POST.get('birth_year', None)
+                user.birth_month = request.POST.get('birth_month', None)
+                user.birth_date = request.POST.get('birth_date', None)
+                user.type = 2
+                user.status = 1
+                user.save()
+                messages.info(request, '환영합니다. 가입되었습니다.')
         return redirect('index')
     else:
         return render(request, 'account/signup.html', {})

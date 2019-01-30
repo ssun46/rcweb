@@ -90,7 +90,7 @@
                             {% elif user.profile.type == 2 %}
                             <a class="dropdown-item" href="{% url 'store:apply' %}">가맹점신청</a>
                             {% endif %}
-                            <a class="dropdown-item" href="#">자전거타기</a>
+                            <a class="dropdown-item" href="{% url 'wallet:publish' %}">자전거타기</a>
                         </div>
                     </li>
                     {% else %}

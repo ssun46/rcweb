@@ -127,10 +127,10 @@
                         <div class="row justify-content-center wallet">
                             <img src="{% static 'img/wallet.png' %}" class="margin-left amount" alt="보유잔액">
                             <div class="top-right">보유 금액</div>
-                            <div class="centered-right">1500,00&nbsp;RC</div>
+                            <div class="centered-right">{{ balance }}&nbsp;RC</div>
                             <div class="bottom-right">
                                 <label class="qrcode-text-btn" style="width: 160px; text-align: right;"><input type=file accept="image/*" capture=environment onchange="openQRCamera(this);">결제하기</label>
-                                &nbsp;/&nbsp;<a href="#" class="font-white">송금하기</a>
+                                &nbsp;/&nbsp;<a href="{% url 'wallet:remittance' %}" class="font-white">송금하기</a>
                             </div>
                         </div>
 
