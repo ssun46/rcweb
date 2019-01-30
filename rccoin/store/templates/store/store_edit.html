@@ -13,13 +13,12 @@
         <div class="row justify-content-center h-100">
             <div class="w-768 card fat noborder">
                 <div class="card-body">
-                    {% if store %}
+                    {% if store.name != None %}
                     <h4 class="card-title">| 가맹점 정보 수정</h4>
                     {% else %}
                     <h4 class="card-title">| 가맹점 신청</h4>
                     {% endif %}
                     <hr style="margin-bottom: 30px;">
-                    
                     
                     <!-- Extra data-->
                     <data id="categoryList" value="{{ categorys }}" hidden></data>
@@ -32,7 +31,7 @@
                     <data id="myClosing_minute" value="{{ store.closing_minute }}" hidden></data>
 
                     <!-- Apply form -->
-                    {% if store %}
+                    {% if store.name != None %}
                     <form action="{% url 'store:edit' %}" method="POST" enctype="multipart/form-data" onsubmit="return chk_validate()">
                     {% else %}
                     <form action="{% url 'store:apply' %}" method="POST" enctype="multipart/form-data" onsubmit="return chk_validate()">
@@ -145,7 +144,7 @@
                         <hr style="margin-top: 30px;"> 
 
                         <div class="row2 justify-content-center">
-                            {% if store %}
+                            {% if store.name != None %}
                             <input type="submit" class="btn btn-success" value="수정" />&nbsp;
                             <a href="{% url 'store:info' %}" class="btn btn-secondary">취소</a>
                             {% else %}

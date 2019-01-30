@@ -1,7 +1,6 @@
 function setStore() {
     var oh = $("#myOpening_hour").val();
     if ( oh == "None" ) {
-        $("#myOpening_hour").attr("value", "");
         $("#name").attr("value", "");
         $("#corporate_number").attr("value", "");
         $("#url").attr("value", "");
@@ -55,11 +54,6 @@ function setTime() {
         $("#closing_minute").append(option)
     }
 
-    $("#opening_hour").val("00").prop("selected", true)
-    $("#opening_minute").val("00").prop("selected", true)
-    $("#closing_hour").val("00").prop("selected", true)
-    $("#closing_minute").val("00").prop("selected", true)
-
     // 내 가맹점 정보로 셋팅
     var myOpening_hour = $("#myOpening_hour").val();
     var myOpening_minute = $("#myOpening_minute").val();
@@ -70,6 +64,11 @@ function setTime() {
         $("#opening_minute").val(myOpening_minute).prop("selected", true);
         $("#closing_hour").val(myClosing_hour).prop("selected", true);
         $("#closing_minute").val(myClosing_minute).prop("selected", true);
+    } else {
+        $("#opening_hour").val("00").prop("selected", true)
+        $("#opening_minute").val("00").prop("selected", true)
+        $("#closing_hour").val("00").prop("selected", true)
+        $("#closing_minute").val("00").prop("selected", true)
     }
 }
 

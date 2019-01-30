@@ -52,7 +52,7 @@ def forget_pwd(request):
     if request.method == 'POST':
         username = request.POST.get("username")
         email = request.POST.get("email")
-        user = User.objects.filter(username=username, email=email)
+        user = (User.objects.filter(username=username, email=email))[0]
         if user:
             # char_set = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'
             # new_pwd = BaseUserManager().make_random_password(length=10, allowed_chars=char_set)

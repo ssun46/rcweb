@@ -84,7 +84,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="{% url 'account:info' %}">계정관리</a>
-                            <a class="dropdown-item" href="#">계좌관리</a>
+                            <a class="dropdown-item" href="{% url 'wallet:info' %}">계좌관리</a>
                             {% if user.profile.type == 1 %}
                             <a class="dropdown-item" href="{% url 'store:info' %}">가맹점관리</a>
                             {% elif user.profile.type == 2 %}

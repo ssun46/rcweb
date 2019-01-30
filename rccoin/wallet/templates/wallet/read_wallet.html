@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load staticfiles %}
+{% endblock head %}
+
+{% block css %}
+.wallet {
+    position: relative;
+    text-align: center;
+    border: 0px;
+}
+.top-right {
+    position: absolute;
+    top: 15%;
+    right: 400px;
+    font-weight: 500;
+    color: #fff;
+}
+.centered-right {
+    position: absolute;
+    top: 45%;
+    right: 400px;
+    font-size: 40px;
+    font-weight: 600;
+    color: #fff;
+}
+.bottom-right {
+    position: absolute;
+    bottom: 15px;
+    right: 400px;
+    color: #fff;
+    
+}
+.qrcode-text-btn {display:inline-block; background:url(//dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat; height:1em; width:1.7em; margin-left:-2em; cursor:pointer}
+.qrcode-text-btn > input[type=file] {position:absolute; overflow:hidden; width:1px; height:1px; opacity:0}
+.font-white, .font-white:hover{
+    color: #fff;
+    cursor: pointer;
+}
+.amount {
+    width: 330px;
+}
+
+/* Media */
+
+/* col-xl */
+@media (max-width: 1200px) {
+    .top-right {
+        top: 15%;
+        right: 310px;
+    }
+    .centered-right {
+        top: 45%;
+        right: 310px;
+    }
+    .bottom-right {
+        bottom: 15px;
+        right: 310px;
+    }
+}
+/* col-lg */
+@media (max-width: 990px) {
+    .top-right {
+        top: 15%;
+        right: 200px;
+    }
+    .centered-right {
+        top: 45%;
+        right: 200px;
+    }
+    .bottom-right {
+        bottom: 15px;
+        right: 200px;
+    }
+}
+/* col-md */
+@media (max-width: 768px) {
+    .top-right {
+        top: 15%;
+        right: 110px;
+    }
+    .centered-right {
+        top: 45%;
+        right: 110px;
+    }
+    .bottom-right {
+        bottom: 15px;
+        right: 110px;
+    }
+}
+/* col-sm */
+@media (max-width: 560px) {
+    .top-right {
+        top: 10%;
+        right: 40px;
+        font-size: 15px;
+    }
+    .centered-right {
+        top: 40%;
+        right: 40px;
+        font-size: 30px;
+    }
+    .bottom-right {
+        bottom: 15px;
+        right: 40px;
+        font-size: 17px;
+    }
+    .amount {
+        width: 100%;
+    }
+
+}
+
+{% endblock css %}
+
+{% block body %}
+
+    <div id="contents" class="container">
+        <div class="row2 justify-content-center h-100">
+            <div class="row2 w-m card-wrapper">
+                <div class="col-md card fat noborder">
+                    <div class="card-body" style="display: block;">
+                        <h4 class="card-title">| 가맹점 관리</h4>
+                        <hr style="margin-bottom: 30px;">
+
+                        <div class="row justify-content-center wallet">
+                            <img src="{% static 'img/wallet.png' %}" class="margin-left amount" alt="보유잔액">
+                            <div class="top-right">보유 금액</div>
+                            <div class="centered-right">1500,00&nbsp;RC</div>
+                            <div class="bottom-right">
+                                <label class="qrcode-text-btn" style="width: 160px; text-align: right;"><input type=file accept="image/*" capture=environment onchange="openQRCamera(this);">결제하기</label>
+                                &nbsp;/&nbsp;<a href="#" class="font-white">송금하기</a>
+                            </div>
+                        </div>
+
+                        <hr>
+                    
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+{% block js %}
+{% endblock js %}

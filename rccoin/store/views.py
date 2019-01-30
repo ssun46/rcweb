@@ -99,20 +99,20 @@ def get_locations():
 @login_required
 def get_myStore(request):
     user = request.user
-    store = Store.objects.filter(Q(representative_id = user.pk) & ~Q(status=3))
-    photo = Photo.objects.filter(Q(store_id=store[0].pk))
+    store = (Store.objects.filter(Q(representative_id = user.pk) & ~Q(status=3)))[0]
+    photo = (Photo.objects.filter(Q(store_id=store.pk)))[0]
     domain = get_categorys()
     loc = get_locations()
     status = ['승인대기중', '승인됨']
 
     data = {
-        'store' : store[0],
-        'photo' : photo[0],
-        'status': status[store[0].status-1],
-        'domain': domain[store[0].category_id-1],
-        'loc'   : loc[store[0].location_id-1],
-        'rdate' : (store[0].registered_date).strftime('%Y-%m-%d %H:%M:%S'),
-        'mdate' : (store[0].modified_date).strftime('%Y-%m-%d %H:%M:%S')
+        'store' : store,
+        'photo' : photo,
+        'status': status[store.status-1],
+        'domain': domain[store.category_id-1],
+        'loc'   : loc[store.location_id-1],
+        'rdate' : (store.registered_date).strftime('%Y-%m-%d %H:%M:%S'),
+        'mdate' : (store.modified_date).strftime('%Y-%m-%d %H:%M:%S')
     }
     return render(request, 'store/store_info.html', data)
 
