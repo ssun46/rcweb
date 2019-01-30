@@ -25,6 +25,7 @@ urlpatterns = [
     path('forget_pwd/', views.forget_pwd, name='forget_pwd'),
     path('agreement/', views.agreement, name='agreement'),
     path('chk_username/', views.chk_username),
+    path('chk_password/', views.chk_password),
     path('signup/', views.signup, name='signup'),
     path('info/', views.get_myinfo, name='info'),
     path('identity/', views.identity, name='identity'),

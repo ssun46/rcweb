@@ -18,7 +18,7 @@ function chk_target() {
             dataType : "json",
             async: false,
         }).done(function(res) {
-            if ( res['exist'] ) {
+            if ( res["exist"] ) {
                 id_isValidated = true
                 msg = "송금 가능한 사용자입니다."
             } else {
@@ -29,17 +29,81 @@ function chk_target() {
     alert(msg)
 }
 
+function chk_password() {
+    var csrf_token = $('meta[name="csrf-token"]').attr("content");
+    var password = $("#password").val();
+    var exist = false
+    $.ajax({
+        type: "POST",
+        url: "/account/chk_password/",
+        data: { password : password, "csrfmiddlewaretoken" : csrf_token },
+        dataType : "json",
+        async: false,
+    }).done( function(res) {
+        if ( res["exist"] ) {
+            exist = true
+        } else {
+            exist = false
+        }
+    });
+    return exist
+}
+
 function chk_validate() {
-    if ( id_isValidated ) {
-        return true
+    var amount = $("#point").val()
+    msg = ""
+    if ( !id_isValidated ) {
+        msg = '받는 계정을 조회해주세요.'
+    } else if ( amount == 0 ) {
+        msg = '송금액(RC)을 입력해 주세요.'
+    } else if ( !$('#agree').is(":checked") ) {
+        msg = '송금 약관에 동의해 주세요.'
+    } else if ( !chk_password() ) {
+        msg = '비밀번호가 일치하지 않습니다.'
     } else {
-        alert('받는 계정을 조회해주세요.')
+        return true
     }
+    alert(msg)
     return false
+}
+
+function numberWithCommas(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+}
+
+function getRestBalance() {
+    var balance = parseInt($("#balance").val().replace(/[^0-9]/g, '')) || 0;
+    var amount = parseInt($("#point").val().replace(/[^0-9]/g, '')) || 0;
+    var restBalance = balance - amount;
+    // console.log("balance:",balance,"amount:",amount,"restBalance:",restBalance)
+    if (restBalance < 0 ){
+        alert("송금액이 잔액을 초과하였습니다. 다시 입력해주세요.") 
+        restBalanceCheck = 0;
+        //   console.log("restBalanceCheck:",restBalanceCheck)
+        $("#rest_balance").attr("value", numberWithCommas(balance))
+    }
+    else {
+        $("#rest_balance").empty();
+        $("#rest_balance").attr("value", numberWithCommas(restBalance))
+        restBalanceCheck = 1;
+        //   console.log("restBalanceCheck:",restBalanceCheck)
+    }
 }
 
 $(function() {
     $("#target").on("change", function() {
         id_isValidated = false
     })
+    $("#point").on("change", function() {
+          getRestBalance()
+    })
+    $('#point').on('keyup', function() {
+        if ($(this).val() != null && $(this).val() != '') {
+          var tmps = parseInt($(this).val().replace(/[^0-9]/g, '')) || '0';
+          var tmps2 = tmps.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
+          $(this).val(tmps2);
+        }
+    });
 })

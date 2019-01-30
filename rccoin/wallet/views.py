@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
@@ -18,7 +18,7 @@ def read_wallet(request):
     response = requests.get(url, params=params)
     res = response.json()
     data = {
-        'balance' : res['value']
+        'balance' : '{:,}'.format(int(res['value']))
     }
     return render(request, 'wallet/read_wallet.html', data)
 
@@ -49,15 +49,45 @@ def publish(request):
     return render(request,'wallet/publish.html')
 
 # 송금
+@csrf_exempt
 @login_required
 def remittance(request):
     if request.method == 'POST':
         # 송금로직
-        pass
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+        fromId = request.user.username
+        toId = request.POST.get("target") 
+        amount = (request.POST.get("point")).replace(',', '')
+        today = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
+        
+        headers = {'Content-Type': 'application/json; charset=utf-8'}
+        url = host + 'transfer'
+        data = {
+            'from_id'   : fromId, 
+            'to_id'     : toId,
+            'amount'    : amount,
+            'type'      : '5',
+            'date'      : today
+        }
+        param_data = { 'param_data' : json.dumps(data) }
+        response = requests.post(url, params=param_data, headers=headers)
+        res = response.json()
+        # 송금 성공 처리
+        return redirect('wallet:info')
+    
     # 송금위한 잔액 전송
-    return render(request, 'wallet/remittance.html', {})
+    user = get_object_or_404(User, pk=request.user.pk)
+    url = host + 'get_account'
+    params = {'user_id' : user.username}
+    response = requests.get(url, params=params)
+    res = response.json()
+    data = {
+        'balance' : '{:,}'.format(int(res['value']))
+    }
+    return render(request, 'wallet/remittance.html', data)
 
 # 결제
+@csrf_exempt
 @login_required
 def payment(request):
     if request.method == 'POST':

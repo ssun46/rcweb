@@ -2,6 +2,7 @@
 
 {% block head %}
 {% load staticfiles %}
+<meta name="csrf-token" content="{{ csrf_token }}" />
 {% endblock head %}
 
 {% block css %}
@@ -16,47 +17,60 @@
                     <h4 class="card-title">| 송금</h4>
                     <hr style="margin-bottom: 30px;">
                     
-                    <!-- remittance form -->
+                    <!-- Extra data -->
                     <data id="to" value="{{ user.username }}" hidden></data>
-                    <form action="{% url 'account:signup' %}" method="POST" onsubmit="return chk_validate()">
+
+                    <!-- remittance form -->
+                    <form action="{% url 'wallet:remittance' %}" method="POST" onsubmit="return chk_validate();">
                         {% csrf_token %}
-                        <div class="form-group">
-                            <label for="target">받는 계정<sup class="text-danger">(필수)</sup></label>
-                            <div style="position:relative">
-                                <input id="target" type="text" class="form-control" name="target" required autofocus style="padding-right: 60px;">
-                                <div class="btn btn-info btn-sm" id="btn-chkid" onclick="chk_target();" style="position: absolute; right: 10px; top: 7px; padding: 2px 7px; font-size: 12px; cursor: pointer;">
-                                    조회
+                        
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-12 form-group">
+                                <label for="target">받는 계정<sup class="text-danger">(필수)</sup></label>
+                                <div style="position:relative">
+                                    <input id="target" type="text" class="form-control" name="target" required autofocus style="padding-right: 60px;">
+                                    <div class="btn btn-info btn-sm" id="btn-chkid" onclick="chk_target();" style="position: absolute; right: 10px; top: 7px; padding: 2px 7px; font-size: 12px; cursor: pointer;">
+                                        조회
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="point">보내는 금액<sup class="text-danger">(필수)</sup></label>
-                            <div style="position:relative">
-                                <input id="point" type="text" class="form-control" name="point" required style="padding-right: 60px;">
+                            <div class="col-lg-6 col-sm-12 form-group">
+                                <label for="password">비밀번호<sup class="text-danger">(필수)</sup></label>
+                                <div style="position:relative">
+                                    <input id="password" type="password" class="form-control" name="password" required autocomplete="off" style="padding-right: 60px;">
+                                </div>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-6 col-md-12 form-group">
-                                <label for="from">보유 잔액</label>
+                            <div class="col-lg-4 col-sm-12 form-group">
+                                <label for="point">송금액 (RC)<sup class="text-danger">(필수)</sup></label>
                                 <div style="position:relative">
-                                    <input id="from" type="text" class="form-control" name="from" autocomplete="off" readonly style="padding-right: 60px;" />
+                                    <input id="point" type="text" class="form-control" name="point" value="0" required style="padding-right: 60px;">
                                 </div>
                             </div>
 
-                            <div class="col-lg-6 col-md-12 form-group">
-                                <label for="rest_balance">송금 후 잔액</label>
+                            <div class="col-lg-4 col-sm-12 form-group">
+                                <label for="balance">보유 금액 (RC)</label>
                                 <div style="position:relative">
-                                    <input id="rest_balance" type="text" class="form-control" name="rest_balance" autocomplete="off" readonly style="padding-right: 60px;" />
+                                    <input id="balance" type="text" class="form-control" name="balance" value="{{ balance }}" autocomplete="off" readonly style="padding-right: 60px;" />
+                                </div>
+                            </div>
+    
+                            <div class="col-lg-4 col-sm-12 form-group">
+                                <label for="rest_balance">송금 후 잔액 (RC)</label>
+                                <div style="position:relative">
+                                    <input id="rest_balance" type="text" class="form-control" name="rest_balance" value="{{ balance }}" autocomplete="off" readonly style="padding-right: 60px;" />
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="password">비밀번호<sup class="text-danger">(필수)</sup></label>
-                            <div style="position:relative">
-                                <input id="password" type="password" class="form-control" name="password" required autocomplete="off" style="padding-right: 60px;">
+                            <div class="checkbox">
+                                <label>
+                                <div style="color:rgb(194, 180, 160)"><input type="checkbox" id="agree" name="agree"> 송금시 책임은 전적으로 본인에게 있음에 동의합니다.</div>
+                                </label>
                             </div>
                         </div>
 

@@ -113,6 +113,21 @@ def chk_username(request):
     json_data = json.dumps(data)
     return HttpResponse(json_data, content_type="application/json;charset=UTF-8")
 
+# 비밀번호 일치 확인
+@login_required
+def chk_password(request):
+    data = {}
+    if request.method == 'POST':
+        username = request.user.username
+        password = request.POST.get('password', None)
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            data['exist'] = True
+        else:
+            data['exist'] = False
+    json_data = json.dumps(data)
+    return HttpResponse(json_data, content_type="application/json;charset=UTF-8")
+
 # 회원가입
 @csrf_exempt
 def signup(request):
