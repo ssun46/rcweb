@@ -25,4 +25,5 @@ urlpatterns = [
     path('publish/', views.publish, name="publish"),
     path('remittance/', views.remittance, name="remittance"),
     path('payment/', views.payment, name="payment"),
+    path('history/', views.get_history),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
