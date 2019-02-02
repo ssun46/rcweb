@@ -26,4 +26,6 @@ urlpatterns = [
     path('remittance/', views.remittance, name="remittance"),
     path('payment/', views.payment, name="payment"),
     path('history/', views.get_history),
+    path('receipt/', views.get_receipt),
+    path('cancel/', views.cancel_payment, name="cancel_payment"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load staticfiles %}
+{% endblock head %}
+
+{% block css %}
+{% endblock css %}
+
+{% block body %}
+
+    <div id="contents" class="container">
+        <div class="row justify-content-center h-100">
+            <div class="row w-768 card-wrapper">
+                <div class="col-md d-none d-md-block">
+                    <img src="{% static 'img/rccoin.png' %}" style="border-radius: 5px;">
+                </div>
+                <div class="col-md card fat">
+                    <div class="card-body">
+                        <h4 class="card-title">| 계정정보</h4>
+                        <hr>
+                        
+                        <!-- MyInfo -->
+                        <div class="profile-sidebar">
+                            <div class="profile-usertitle">
+                                <div class="profile-usertitle-name">
+                                    {{ user.username }}
+                                </div>
+                                <div class="profile-usertitle-job" style="margin-bottom: 30px;">
+                                    {{ utype }}
+                                </div>
+                            </div>
+                            
+                            <hr>
+
+                            <div class="profile-usermenu">
+                                <ul class="nav">
+                                    <li>
+                                        <img src="{% static "img/email.png"%}" style="height: 20px;">
+                                        <info style="margin-left: 10px;">{{ user.email }}</info>
+                                    </li>
+                                </ul>
+                                <ul class="nav">
+                                    <li>
+                                        <img src="{% static "img/sex.png"%}" style="height: 20px;">
+                                        <info style="margin-left: 10px;">{{ gender }}</info>
+                                    </li>
+                                </ul>
+                                <ul class="nav">
+                                    <li>
+                                        <img src="{% static "img/cake.png"%}" style="height: 20px;">
+                                        <info style="margin-left: 10px;">{{ user.profile.birth_year }}년&nbsp;{{ user.profile.birth_month }}월&nbsp;{{ user.profile.birth_date }}일&nbsp;</info>
+                                    </li>
+                                </ul>                                
+                            </div>
+                            
+                            <hr>
+
+                            <div class="profile-userbuttons">
+                                <a href="{% url 'account:identity' %}"><button type="button" class="btn btn-success btn-sm">정보수정</button></a>
+                                <a href="{% url 'account:chg_pwd' %}"><button type="button" class="btn btn-danger btn-sm">비밀번호 변경</button></a>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+{% block js %}
+{% endblock js %}

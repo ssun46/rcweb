@@ -56,7 +56,7 @@ def forget_pwd(request):
     if request.method == 'POST':
         username = request.POST.get("username")
         email = request.POST.get("email")
-        user = (User.objects.filter(username=username, email=email))[0]
+        user = User.objects.filter(username=username, email=email)
         if user:
             # char_set = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789'
             # new_pwd = BaseUserManager().make_random_password(length=10, allowed_chars=char_set)
@@ -211,12 +211,15 @@ def identity(request):
 @login_required
 def account_edit(request):
     if request.method == 'POST':
-        user = get_object_or_404(Profile, user_id=request.user.pk)
-        user.gender = request.POST.get('gender', None)
-        user.birth_year = request.POST.get('birth_year', None)
-        user.birth_month = request.POST.get('birth_month', None)
-        user.birth_date = request.POST.get('birth_date', None)
+        user = get_object_or_404(User, pk=request.user.pk)
+        profile = get_object_or_404(Profile, user_id=request.user.pk)
+        user.email = request.POST.get('email', None)
+        profile.gender = request.POST.get('gender', None)
+        profile.birth_year = request.POST.get('birth_year', None)
+        profile.birth_month = request.POST.get('birth_month', None)
+        profile.birth_date = request.POST.get('birth_date', None)
         user.save()
+        profile.save()
         return redirect('account:info')
     return render(request, 'account/account_edit.html', {})
 

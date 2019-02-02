@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load staticfiles %}
+{% endblock head %}
+
+{% block css %}
+{% endblock css %}
+
+{% block body %}
+
+    <div id="contents" class="container">
+        <div class="row justify-content-center h-100">
+            <div class="w-768 card fat noborder">
+                <div class="card-body">
+                    <h4 class="card-title">| 정보수정</h4>
+                    <hr style="margin-bottom: 30px;">
+                    
+                    <!-- User data-->
+                    <data id="_gender" value="{{ user.profile.gender }}" hidden></data>
+                    <data id="_birth_year" value="{{ user.profile.birth_year }}" hidden></data>
+                    <data id="_birth_month" value="{{ user.profile.birth_month }}" hidden></data>
+                    <data id="_birth_date" value="{{ user.profile.birth_date }}" hidden></data>
+
+                    <!-- Modify form -->
+                    <form action="{% url 'account:edit' %}" method="POST" onsubmit="return chk_validate()">
+                        {% csrf_token %}
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 form-group">
+                                <label for="email">이메일주소</label>
+                                <div style="position:relative">
+                                    <input id="email" type="email" class="form-control" name="email" value="{{ user.email }}" required autofocus style="padding-right: 60px;">
+                                </div>
+                                <div class="info">
+                                    * 이메일은 아이디/비밀번호 찾기에 이용됩니다.
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-6 col-md-12 form-group">
+                                <label for="gender">성별</label>
+                                <div style="position:relative">
+                                    <select id="gender" name="gender" class="form-control">
+                                        <option value="1" selected="true">남성</option>
+                                        <option value="2">여성</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-4 col-md-12 form-group">
+                                <label for="birth_year">생년</label>
+                                <div style="position:relative">
+                                    <select id="birth_year" name="birth_year" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4 col-md-12 form-group">
+                                <label for="birth_month">월</label>
+                                <div style="position:relative">
+                                    <select id="birth_month" name="birth_month" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4 col-md-12 form-group">
+                                <label for="birth_date">일</label>
+                                <div style="position:relative">
+                                    <select id="birth_date" name="birth_date" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+ 
+                        <hr style="margin-top: 30px;"> 
+
+                        <div class="row2 justify-content-center">
+                            <input type="submit" class="btn btn-success" value="수정" />&nbsp;
+                            <a href="{% url 'account:info' %}" class="btn btn-secondary">취소</a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+{% block js %}
+    <script src="{% static 'js/edit.js'%}"></script>
+{% endblock js %}

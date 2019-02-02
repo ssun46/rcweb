@@ -79,7 +79,7 @@ function getRestBalance() {
     var restBalance = balance - amount;
     // console.log("balance:",balance,"amount:",amount,"restBalance:",restBalance)
     if (restBalance < 0 ){
-        alert("송금액이 잔액을 초과하였습니다. 다시 입력해주세요.") 
+        alert("송금액이 보유잔액을 초과하였습니다. 다시 입력해주세요.") 
         restBalanceCheck = 0;
         //   console.log("restBalanceCheck:",restBalanceCheck)
         $("#rest_balance").attr("value", numberWithCommas(balance))

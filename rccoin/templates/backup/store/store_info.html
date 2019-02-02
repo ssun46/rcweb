@@ -1,0 +1,383 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load staticfiles %}
+<meta name="csrf-token" content="{{ csrf_token }}" />
+{% endblock head %}
+
+{% block css %}
+strong {
+    font-size: 17px;
+    font-weight: 800;
+    margin-left: 5px;
+}
+small {
+    color: #8a8a8b;
+    font-size: 17px;
+}
+.profile-usertitle-name {
+    font-size: 25px;
+}
+.personal-details {
+    color: #4d4e4f;
+    margin-top: 10px;
+}
+.profile-img {
+    text-align: center;
+}
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
+    display: block;
+    border-radius: 10px;
+    max-width: 100%;
+    height: auto;
+}
+
+
+table {
+    border-collapse:separate; 
+    border-spacing: 5px;
+}
+.table-filter {
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+.table-filter .media-photo {
+    width: 50px;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+.table-filter .media-body {
+    display: block;
+}
+.table-filter .media .title {
+    color: #2BBCDE;
+    font-weight: bold;
+    line-height: normal;
+    margin-top: 2px;
+}
+.table-filter .media {
+    font-size: 20px;
+}
+.title {
+    font-size: 15px;
+}
+.table-filter .media-meta {
+    font-size: 15px;
+    color: #999;
+    margin-left: 10px;
+}
+.table-filter .media .summary {
+    color: #7f7f7f;
+    font-size: 18px;
+}
+.table-filter tbody tr td {
+    padding: 10px;
+    vertical-align: middle;
+    border-top-color: #eee;
+}
+tr.init td {
+    border-radius: 5px;
+    border-left: 5px solid #007bff;
+}
+tr.publish td {
+    border-radius: 5px;
+    border-left: 5px solid #28a745;
+}
+tr.remittance td {
+    border-radius: 5px;
+    border-left: 5px solid #ffc107;
+}
+tr.payment td {
+    border-radius: 5px;
+    border-left: 5px solid #dc3545;
+}
+tr.canceled td {
+    border-radius: 5px;
+    border-left: 5px solid gray;
+}
+.table-filter .media span.init {
+    color: #007bff;
+    font-size: 17px;
+    font-weight: 600;
+    margin-right: 15px;
+}
+.table-filter .media span.publish {
+    color: #28a745;
+    font-size: 17px;
+    font-weight: 600;
+    margin-right: 15px;
+}
+.table-filter .media span.remittance {
+    color: #ffc107;
+    font-size: 17px;
+    font-weight: 600; 
+    margin-right: 15px;
+}
+.table-filter .media span.payment {
+    color: #dc3545;
+    font-size: 17px;
+    font-weight: 600;
+    margin-right: 15px;
+}
+.table-filter .media span.canceled {
+    color: gray;
+    font-size: 17px;
+    font-weight: 600;
+    margin-right: 15px;
+}
+.pull-right {
+    float: right!important;
+}
+font.title {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+/* Media */
+
+
+/* col-xl */
+@media (max-width: 1200px) {
+    .top-right {
+        top: 15%;
+        right: 310px;
+    }
+    .centered-right {
+        top: 45%;
+        right: 310px;
+    }
+    .bottom-right {
+        bottom: 15px;
+        right
+    }
+}
+/* col-lg */
+@media (max-width: 960px) {
+    .top-right {
+        top: 15%;
+        right: 200px;
+    }
+    .centered-right {
+        top: 45%;
+        right: 200px;
+    }
+    .bottom-right {
+        bottom: 15px;
+        right: 200px;
+    }
+}
+/* col-md */
+@media (max-width: 768px) {
+    .profile-usertitle-name {
+        margin-top: 10px;        
+    }
+    table {
+        margin-top: 10px;
+    }
+    .top-right {
+        top: 15%;
+        right: 110px;
+    }
+    .centered-right {
+        top: 45%;
+        right: 110px;
+    }
+    .bottom-right {
+        bottom: 15px;
+        right: 110px;
+    }
+    .table-filter .title {
+        font-size: 13px;
+    }
+    .table-filter .summary {
+        font-size: 15px;
+    }
+}
+/* col-sm */
+@media (max-width: 540px) {
+    small {
+        font-size: 15px;
+    }
+    .top-right {
+        top: 10%;
+        right: 40px;
+        font-size: 15px;
+    }
+    .centered-right {
+        top: 40%;
+        right: 40px;
+        font-size: 30px;
+    }
+    .bottom-right {
+        bottom: 15px;
+        right: 40px;
+        font-size: 17px;
+    }
+    .amount {
+        width: 100%;
+    }
+    .table-filter .media-meta {
+        margin-top: 3px;
+        font-size: 13px;
+    }
+    .table-filter .summary {
+        font-size: 13px;
+    }
+}
+{% endblock css %}
+
+{% block body %}
+
+    <div id="contents" class="container">
+        <div class="row2 justify-content-center h-100">
+            <div class="row2 w-m card-wrapper">
+                <div class="col-md card fat noborder">
+                    <div class="card-body" style="display: block;">
+                        <h4 class="card-title">| 가맹점 관리</h4>
+                        <hr style="margin-bottom: 30px;">
+                    
+                        <!-- MyStore info -->
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="profile-img">
+                                    <img src="/media/{{ photo.image }}" class="img-responsive" alt="">
+                                </div>
+                                
+                                <hr>
+
+                                <div class="row2 justify-content-center">
+                                    <a href="{% url 'store:edit' %}" class="btn btn-success" style="margin: 0px 5px 0px 5px;">수정</a> 
+                                    <a href="{% url 'store:delete' s_id=store.pk %}" class="btn btn-danger" style="margin: 0px 5px 0px 5px;">삭제</a>
+                                    {% if store.status == 2 %}
+                                    </form>
+                                    <form action="{% url 'store:qrcode' %}" method="POST" target="_blank">
+                                        {% csrf_token %}
+                                        <input type="text" id="s_id" name="s_id" hidden></input>
+                                        <button type="submit" id="btn_qr" class="btn btn-warning" style="margin: 0px 5px 0px 5px;">QR코드</button>
+                                    </form>
+                                    {% endif %}
+                                </div>
+
+                                <hr class="d-block d-sm-none">
+                            </div>
+
+                            <div class="col-md-9">
+                                <div class="name-wrapper">
+                                    <div class="profile-usertitle-name">{{ store.name }}</div>
+                                    <div class="profile-usertitle-job">(사업자등록번호) {{ store.corporate_number }}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>등록업종</small>
+                                            <strong>{{ domain }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>등록지역</small>
+                                            <strong>{{ loc }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>영업시간</small>
+                                            <strong>{{ store.opening_hour }}:{{ store.opening_minute }}-{{ store.closing_hour }}:{{ store.closing_minute }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>홈페이지</small>
+                                            <strong>{{ store.url }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>연락처</small>
+                                            <strong>{{ store.phone_number }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>승인상태</small>
+                                            <strong>{{ status }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="personal-details">
+                                            <small>주소</small>
+                                            <strong>{{ store.address }}</strong>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>등록일</small>
+                                            <strong>{{ rdate }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                            <small>수정일</small>
+                                            <strong>{{ mdate }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="personal-details">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter button -->
+        <div class="row2 justify-content-center h-100">
+            <div class="w-m card-wrapper">
+                <div class="col-md noborder">
+                    <div class="row card-body">
+                        <h4 class="col-md-8 card-title">| 거래 이력</h4>
+                        <div class="col-md-4 btn-group">
+                            <button type="button" class="btn btn-primary" onclick="get_receipt(1, 0)">전체</button>
+                            <button type="button" class="btn btn-danger" onclick="get_receipt(1, 1)">결제</button>
+                            <button type="button" class="btn btn-secondary" onclick="get_receipt(1, 2)">결제취소</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History -->
+        <table class="table table-filter">
+            <tbody id="receipt"></tbody>                            
+        </table>
+        <div class="row2 justify-content-center">
+            <nav aria-label="page navigation">
+                <ul id="page-area" class="pagination"></ul>
+            </nav>
+        </div>        
+        
+
+    </div>
+
+{% endblock body %}
+
+{% block js %}
+<script src="{% static 'js/receipt.js' %}"></script>
+{% endblock js %}

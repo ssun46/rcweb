@@ -5,64 +5,33 @@
 {% endblock head %}
 
 {% block css %}
-strong {
-    font-size: 17px;
-    font-weight: 800;
-    margin-left: 5px;
-}
-small {
-    color: #8a8a8b;
-    font-size: 17px;
-}
-.profile-usertitle-name {
-    font-size: 25px;
-}
-.personal-details {
-    color: #4d4e4f;
-    margin-top: 10px;
-}
-.profile-img {
-    text-align: center;
-}
-.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
-    display: block;
-    border-radius: 10px;
-    max-width: 100%;
-    height: auto;
-}
-
-/* Media */
-
-/* col-sm */
-@media (max-width: 540px) {
-    small {
-        font-size: 15px;
+@media (max-width: 765px) {
+    .btn-group {
+        margin-top: 10px;
     }
-}
-/* col-md */
-@media (max-width: 768px) {
-    .profile-usertitle-name {
-        margin-top: 10px;        
-    }
-}
-/* col-lg */
-@media (max-width: 960px) {
-}
-/* col-xl */
-@media (max-width: 1200px) {
 }
 {% endblock css %}
-
 {% block body %}
 
-    <div id="contents" class="container">
-        <div class="row2 justify-content-center h-100">
-            <div class="row2 w-m card-wrapper">
-                <div class="col-md card fat noborder">
-                    <div class="card-body" style="display: block;">
-                        <h4 class="card-title">| 가맹점 관리</h4>
-                        <hr style="margin-bottom: 30px;">
-                    
+
+    <!-- Title -->
+    <div id="contents" class="page-header">
+        <div class="container">
+            <div class="row page-title">
+                <a>계좌관리</a>
+            </div>
+        </div>
+    </div>
+    
+    <div id="contents">
+        <div class="container">
+            <div class="row justify-content-center page">
+                <div class="col-md card">
+                    <div class="card-body">
+                        <h5 class="card-subtitle"><a style="color:#00c746;">|</a> 계좌정보</h5>
+
+                        <hr>
+
                         <!-- MyStore info -->
                         <div class="row">
                             <div class="col-md-3">
@@ -76,7 +45,12 @@ small {
                                     <a href="{% url 'store:edit' %}" class="btn btn-success" style="margin: 0px 5px 0px 5px;">수정</a> 
                                     <a href="{% url 'store:delete' s_id=store.pk %}" class="btn btn-danger" style="margin: 0px 5px 0px 5px;">삭제</a>
                                     {% if store.status == 2 %}
-                                    <a href="{% url 'store:qrcode' %}" class="btn btn-warning" style="margin: 0px 5px 0px 5px;">QR 코드</a>
+                                    </form>
+                                    <form action="{% url 'store:qrcode' %}" method="POST" target="_blank">
+                                        {% csrf_token %}
+                                        <input type="text" id="s_id" name="s_id" hidden></input>
+                                        <button type="submit" id="btn_qr" class="btn btn-warning" style="margin: 0px 5px 0px 5px;">QR코드</button>
+                                    </form>
                                     {% endif %}
                                 </div>
 
@@ -163,14 +137,49 @@ small {
                         </div>
 
                         <hr>
-                    
+
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     </div>
 
+
+    <!-- Filter button -->
+    <div id="contents">
+        <div class="container">
+            <div class="row justify-content-center page">
+                <h5 class="col-md-8 card-subtitle"><a style="color:#00c746;">|</a> 거래 이력</h5>
+                
+                <div class="col-md-4 btn-group">
+                    <button type="button" class="btn btn-primary" onclick="get_receipt(1, 0)">전체</button>
+                    <button type="button" class="btn btn-danger" onclick="get_receipt(1, 1)">결제</button>
+                    <button type="button" class="btn btn-secondary" onclick="get_receipt(1, 2)">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- History -->
+    <div id="contents">
+        <div class="container">
+            <div class="row justify-content-center page">
+                <table class="table table-filter">
+                    <tbody id="receipt"></tbody>                            
+                </table>
+                <div class="row2 justify-content-center">
+                    <nav aria-label="page navigation">
+                        <ul id="page-area" class="pagination"></ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+
 {% endblock body %}
 
 {% block js %}
+<script src="{% static 'js/receipt.js' %}"></script>
 {% endblock js %}

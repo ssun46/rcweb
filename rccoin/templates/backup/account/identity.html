@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load staticfiles %}
+{% endblock head %}
+
+{% block css %}
+{% endblock css %}
+
+{% block body %}
+
+    <div id="contents" class="container">
+        <div class="row justify-content-center h-100">
+            <div class="row w-768 card-wrapper">
+                <div class="col-md d-none d-md-block">
+                    <img src="{% static 'img/rccoin.png' %}" style="border-radius: 5px;">
+                </div>
+                <div class="col-md card fat">
+                    <div class="card-body">
+                        <h4 class="card-title">| 본인확인</h4>
+                        <hr style="margin-bottom: 30px;">
+                        
+                        <!-- Authendicate form -->
+                        <form action="{% url 'account:identity' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="password">비밀번호</label>
+                                <div style="position:relative" id="eye-password-0">
+                                    <input id="password" type="password" class="form-control" name="password" autocomplete="off" required autofocus style="padding-right: 60px;" />
+                                </div>
+                                <div class="float-left">
+                                    본인확인을 위해<br>비밀번호를 입력해주세요.
+                                </div>
+                            </div>
+                            
+                            <br>
+
+                            <div class="form-group m-0">
+                                {% for message in messages %}
+                                <div class="alert alert-danger" style="margin-top: 20px">
+                                    <img src="{% static 'img/exclamation-mark.png' %}" style="width: 18px">&nbsp;{{ message }}
+                                </div>
+                                {% endfor %}
+                                
+                                <hr style="margin-top: 15px;"> 
+                                
+                                <button type="submit" class="btn btn-success btn-block">
+                                    확인
+                                </button>
+                                <a href="{% url 'account:info' %}" class="btn btn-danger btn-block">취소</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}
+
+{% block js %}
+{% endblock js %}

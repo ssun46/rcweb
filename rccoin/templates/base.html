@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     
     <style>
-        {% block css %} {% endblock css %}
+        {% block css %} 
+        {% endblock css %}
     </style>
 
 </head>
@@ -27,11 +28,11 @@
 <body>
   
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
         <div class="container">
          
             <a class="navbar-brand" href="{% url 'index' %}">
-                <img src="{% static 'img/logo.png' %}" height="20%">
+                <img src="{% static 'img/logo.png' %}">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -41,10 +42,10 @@
                 <ul class="navbar-nav">
                     <div class="dropdown-divider"></div>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="intro" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             소개
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-menu" aria-labelledby="intro">
                             <a class="dropdown-item" href="#">RCcoin 소개</a>
                             <a class="dropdown-item" href="#">이용안내</a>
                         </div>
@@ -53,18 +54,18 @@
                         <a class="nav-link" href="#">오시는 길<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="info" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             정보마당
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-menu" aria-labelledby="info">
                             <a class="dropdown-item" href="#">공지사항</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="community" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             커뮤니티
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-menu" aria-labelledby="community">
                             <a class="dropdown-item" href="#">가맹게시판</a>
                             <a class="dropdown-item" href="#">자유게시판</a>
                         </div>
@@ -79,10 +80,10 @@
                         <a class="nav-link" href="{% url 'account:logout' %}">로그아웃</a>
                     </il>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="mypage" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             마이페이지
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-menu" aria-labelledby="mypage">
                             <a class="dropdown-item" href="{% url 'account:info' %}">계정관리</a>
                             <a class="dropdown-item" href="{% url 'wallet:info' %}">계좌관리</a>
                             {% if user.profile.type == 1 %}
@@ -113,8 +114,7 @@
     
     <!-- Footer -->
     <div class="card text-center">
-        
-        <div class="card-body bg-dark">
+        <div class="bg-dark">
             <div class="container">
                 <div class="row" style="text-align: left; margin: 3% 0;">
                     <div class="col-md-4">
@@ -127,8 +127,8 @@
                         <div class="card-title">
                             <h5><strong>소개</strong></h5>
                             <ul class="card-text">
-                                <li><a href="#">-&nbsp;RC코인이란?</a></li>
-                                <li><a href="#">-&nbsp;이용안내</a></li>
+                                <li><a href="#">RC코인이란?</a></li>
+                                <li><a href="#">이용안내</a></li>
                             </ul>
                             <br class="d-block d-md-none">
                         </div>
@@ -137,7 +137,7 @@
                         <div class="card-title">
                             <h5><strong>정보마당</strong></h5>
                             <ul class="card-text">
-                                <li><a href="#">-&nbsp;공지사항</a></li>
+                                <li><a href="#">공지사항</a></li>
                             </ul>
                             <br class="d-block d-md-none">
                         </div>
@@ -146,8 +146,8 @@
                         <div class="card-title">
                             <h5><strong>커뮤니티</strong></h5>
                             <ul class="card-text">
-                                <li><a href="#">-&nbsp;가맹게시판</a></li>
-                                <li><a href="#">-&nbsp;자유게시판</a></li>
+                                <li><a href="#">가맹게시판</a></li>
+                                <li><a href="#">자유게시판</a></li>
                             </ul>
                             <br class="d-block d-md-none">
                         </div>
@@ -156,9 +156,9 @@
                         <div class="card-title">
                             <h5><strong>가맹점</strong></h5>
                             <ul class="card-text">
-                                <li><a href="#">-&nbsp;울릉읍</a></li>
-                                <li><a href="#">-&nbsp;북면</a></li>
-                                <li><a href="#">-&nbsp;서면</a></li>
+                                <li><a href="#">울릉읍</a></li>
+                                <li><a href="#">북면</a></li>
+                                <li><a href="#">서면</a></li>
                             </ul>
                         </div>
                     </div>
@@ -167,8 +167,7 @@
         </div>    
         <div class="card-footer text-muted bg-light">
             <div class="container">
-                © Copyrights RGB PROJECT. All rights reserved.
-                <br>Designed by Team RGB.
+                <p>© Copyrights Team RGB. All rights reserved.</p>
             </div>
         </div>
     

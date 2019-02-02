@@ -28,12 +28,11 @@ function get_history(this_page, query_type) {
             $("#history").empty()
             res["history_list"].forEach(function(data) {
                 var idx = Math.floor((parseInt(data.txType)+1)/2)
-                console.log(img[data.txType])
                 var text = `<tr class="${css[Math.floor((parseInt(idx)+1)/2)]}">
                                 <td>
                                     <div class="media">
                                         <a href="#" class="pull-left">
-                                            <img src="../../static/img/${img[data.txType]}" class="media-photo">
+                                            <img src="../../static/img/${img[data.txType]}" class="media-photo d-none d-md-block">
                                         </a>
                                         <div class="media-body">
                                             <span class="media-meta pull-right">${data.date}</span>
