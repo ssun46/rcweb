@@ -121,11 +121,11 @@ def get_myStore(request):
 def del_store(request, s_id):
     store = (Store.objects.filter(Q(pk=s_id) & ~Q(status=3)))[0]
     if store.representative_id == request.user.pk:
-        # store.status = 3
-        # store.save()
-        # profile = get_object_or_404(Profile, user=request.user)
-        # profile.type = 2
-        # profile.save()
+        store.status = 3
+        store.save()
+        profile = get_object_or_404(Profile, user=request.user)
+        profile.type = 2
+        profile.save()
         # 삭제 성공
         return redirect('/store1/done')
     else:

@@ -99,12 +99,13 @@ def remittance(request):
 @login_required
 def payment(request):
     if request.method == 'POST':
-        amount = request.POST.get("amount", 0)
+        amount = request.POST.get("amount", 0).replace(',', '')
         s_id = request.POST.get('s_id', 0)
         store = get_object_or_404(Store, pk=s_id)
         to_user = get_object_or_404(User, pk=int(store.representative_id))
         today = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
-                
+        if to_user.pk == request.user.pk:
+            return redirect('/payment2/done/')
         headers = {'Content-Type': 'application/json; charset=utf-8'}
         url = host + "transfer"
         data = {
@@ -177,7 +178,7 @@ def get_history(request):
 
     for history in p.page(this_page_num):
         s_name = history['trader']
-        if history['txType'] == '1':
+        if history['txType'] == '1' or history['txType'] == '4':
             user = get_object_or_404(User, username=history['trader'])
             store = Store.objects.filter(Q(representative=user.id) & ~Q(status=3))
             s_name = store[0].name
@@ -264,15 +265,29 @@ def get_receipt(request):
     json_data = json.dumps(data)
     return HttpResponse(json_data, content_type="application/json;charset=UTF-8")
 
-# 거래 취소
+
+# 거래 취소 확인 페이지
 @csrf_exempt
 @login_required
 def cancel_payment(request):
+    to = request.POST.get('to', None)
+    amount = request.POST.get('amount', None)
+    tx = request.POST.get('tx', None)
+    me = get_object_or_404(User, username=request.user.username)
+    store = Store.objects.filter(Q(representative=me) & ~Q(status=3))
+    return render(request, 'wallet/cancel_payment.html', dict(trader=to, store=store[0].name, username=me.username, amount=amount, tx=tx))
+
+
+# 거래 취소
+@csrf_exempt
+@login_required
+def cancel(request):
     if request.method == 'POST':
-        to = request.POST.get('to', None)
-        key = request.user.username
+        to = request.POST.get('trader', None)
+        key = request.POST.get('username', None)
         amount = request.POST.get('amount', None)
         tx = request.POST.get('tx', None)
+        comment = request.POST.get('comment', None)
         today = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
 
         headers = {'Content-Type': 'application/json; charset=utf-8'}
@@ -294,8 +309,8 @@ def cancel_payment(request):
             canceled.txHash = tx
             canceled.save()
         
-            chart = ChartStat.objects.get(tx_id = tx)
-            chart.delete()
+            # chart = ChartStat.objects.get(tx_id = tx)
+            # chart.delete()
             return redirect('/cancel1/done/')
 
         return redirect('/cancel2/done/')

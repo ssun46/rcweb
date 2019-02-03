@@ -25,6 +25,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('<str:op>/done/', views.done, name='done'),
     # path('accounts/', include('django.contrib.auth.urls')),
+    # path('operate/', include('operate.urls', namespace='operate')),
     path('account/', include('account.urls', namespace='account')),
     path('store/', include('store.urls', namespace='store')),
     path('wallet/', include('wallet.urls', namespace='wallet')),

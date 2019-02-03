@@ -49,6 +49,8 @@ function chk_validate() {
         $("#password").select()
         msg = "비밀번호가 일치하지 않습니다."
     } else {
+        $("#btn-submit").attr("onClick", "return false");
+        $("#btn-cancel").attr("onClick", "return false");
         return true
     }
     alert(msg)

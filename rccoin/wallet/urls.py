@@ -27,5 +27,6 @@ urlpatterns = [
     path('payment/', views.payment, name="payment"),
     path('history/', views.get_history),
     path('receipt/', views.get_receipt),
-    path('cancel/', views.cancel_payment, name="cancel_payment"),
+    path('cancel/', views.cancel, name="cancel"),
+    path('cancel_payment/', views.cancel_payment, name="cancel_payment"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

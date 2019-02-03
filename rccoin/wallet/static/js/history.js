@@ -21,7 +21,7 @@ function get_history(this_page, query_type) {
                 "withdraw.png", "deposit.png",
                 "withdraw.png", "deposit.png",
                 "withdraw.png", "deposit.png",
-                "", "wallet2.png"]
+                "", "wallet1.png"]
             var current_page_num = parseInt(res["current_page_num"])
             var max_page_num = parseInt(res["max_page_num"])
             

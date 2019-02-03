@@ -84,6 +84,7 @@ function chk_validate() {
     } else if( corporate_number == "" ) {
         msg = "사업자등록번호를 입력해주세요."
     } else if( !corporate_number.match(pattern) ) {
+        $("#corporate_number").focus()
         msg = "사업자등록번호 형식이 올바르지 않습니다. 'ex) 123-12-12345'"
     } else if( image == "" ) {
         msg = "가맹점 사진을 등록하세요."

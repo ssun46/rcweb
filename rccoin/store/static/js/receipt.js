@@ -1,6 +1,6 @@
 function cancel(num) {
     var csrf_token = $('meta[name="csrf-token"]').attr("content")
-    var url = "/wallet/cancel/"
+    var url = "/wallet/cancel_payment/"
     var to = $(`data${num}`).attr("to")
     var amount = $(`data${num}`).attr("amount")
     var tx = $(`data${num}`).attr("tx")
@@ -28,7 +28,7 @@ function get_receipt(this_page, option) {
         if ( data["receipt_list"] ) {
             var type = ["결제", "결제취소"];
             var css = ["payment", "canceled"];
-            var img = ["wallet2.png", "withdraw.png"]
+            var img = ["wallet1.png", "deposit.png", "withdraw.png"]
             var current_page_num = parseInt(data["current_page_num"]);
             var max_page_num = parseInt(data["max_page_num"]);
             var seq = 0
@@ -40,7 +40,7 @@ function get_receipt(this_page, option) {
                                 <td>
                                     <div class="media">
                                         <a href="#" class="pull-left">
-                                            <img src="../../static/img/${img[idx]}" class="media-photo d-none d-md-block">
+                                            <img src="../../static/img/${img[r.txType-1]}" class="media-photo d-none d-md-block">
                                         </a>
                                         <div class="media-body">
                                             <span class="media-meta pull-right">${r.date}</span>
