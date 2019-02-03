@@ -77,9 +77,11 @@ def remittance(request):
         param_data = { 'param_data' : json.dumps(data) }
         response = requests.post(url, params=param_data, headers=headers)
         res = response.json()
-        # 송금 성공 처리
-        sleep(2)
-        return redirect('wallet:info')
+        
+        if res['result'] == 'success':
+            return redirect('/remittance1/done/')
+        else:
+            return redirect('/remittance2/done/')
     
     # 송금위한 잔액 전송
     user = get_object_or_404(User, pk=request.user.pk)
@@ -117,15 +119,16 @@ def payment(request):
         response = requests.post(url, params=param_data, headers=headers)
         msg = response.json()
         # 결제 결과 처리
-        return redirect('wallet:info')
-    
+        if msg['result'] == 'success':
+            return redirect('/payment1/done/')
+        else:
+            return redirect('/payment2/done/')
     try:
         
         s_id = request.GET.get('s_id', 0)
         store = get_object_or_404(Store, id=s_id)
     except:
-        # 에러처리
-        redirect('wallet:info')
+        return redirect('/payment2/done/')
     
     url = host + 'get_account'
     params = {'user_id' : request.user.username}
@@ -271,10 +274,7 @@ def cancel_payment(request):
         amount = request.POST.get('amount', None)
         tx = request.POST.get('tx', None)
         today = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
-        print(to)
-        print(key)
-        print(amount)
-        print(tx)
+
         headers = {'Content-Type': 'application/json; charset=utf-8'}
         url = host + "transfer"
         data = {
@@ -296,8 +296,6 @@ def cancel_payment(request):
         
             chart = ChartStat.objects.get(tx_id = tx)
             chart.delete()
-        else:
-            # 에러처리
-            pass
+            return redirect('/cancel1/done/')
 
-        return redirect('store:info')
+        return redirect('/cancel2/done/')

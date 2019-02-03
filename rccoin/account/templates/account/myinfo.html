@@ -37,7 +37,7 @@
                             <div class="profile-sidebar">
                                 <div class="profile-usertitle">
                                     <div class="profile-usertitle-name">
-                                        {{ user.username }}
+                                        <img src="{% static 'img/user_img.png' %}"> {{ user.username }}
                                     </div>
                                     <div class="profile-usertitle-job" style="margin-bottom: 30px;">
                                         {{ utype }}
@@ -70,7 +70,7 @@
                                 <hr>
 
                                 <div class="form-group m-0">
-                                    <a href="{% url 'account:identity' %}" class="btn btn-success btn-block">정보수정</a>
+                                    <a href="{% url 'account:identity' 'u_edit' %}" class="btn btn-success btn-block">정보수정</a>
                                     <a href="{% url 'account:chg_pwd' %}" class="btn btn-danger btn-block">비밀번호 변경</a>
                                 </div>
                                 

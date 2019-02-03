@@ -3,8 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout, update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User, BaseUserManager
-from django.core.mail import send_mail
+from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from time import sleep
@@ -132,7 +131,6 @@ def chk_password(request):
 # 회원가입
 @csrf_exempt
 def signup(request):
-    success = 0
     if request.method == 'POST':
         key = request.POST.get('username', None)
         if key:
@@ -149,12 +147,12 @@ def signup(request):
             response = requests.post(url, params=param_data, headers=headers)
             msg = response.json()
             if msg['result'] == 'fail':
-                success = 3
+                redirect('/signup3/done/')
             else:
                 try:
                     get_object_or_404(User, email=request.POST.get('email', None))
                 except:
-                    sleep(3)
+                    sleep(2)
                     # 3000 rc 발행
                     today = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M:%S')
                     headers = {'Content-Type': 'application/json; charset=utf-8'}
@@ -169,9 +167,8 @@ def signup(request):
                     response = requests.post(url, params=param_data, headers=headers)
                     msg = response.json()
                     if msg['result'] == 'success':
-                        success = 2
-                    else:
-                        success = 1
+                        redirect('/signup2/done/')
+                    pass
 
                 user = User()
                 user.username = request.POST.get('username', None)
@@ -184,7 +181,7 @@ def signup(request):
                 user.type = 2
                 user.status = 1
                 user.save()
-        return redirect('/signup'+str(success)+'/done/')
+        return redirect('/signup1/done/')
     else:
         return render(request, 'account/signup.html', {})
 
@@ -197,35 +194,17 @@ def get_myinfo(request):
 
 # 본인인증
 @login_required
-def identity(request, op=None, s_id=None):
+def identity(request):
     if request.method == 'POST':
         username = request.user.username
         password = request.POST.get('password', None)
         user = authenticate(username=username, password=password)
         if user is not None:
-            if op == 'u_edit':
-                return redirect('account:edit')
-            elif op == 's_edit':
-                return redirect('store:edit')
-            elif op == 's_del':
-                s_id = request.POST.get('s_id', None)
-                return redirect('/store/'+s_id+'/delete')
+            return render(request, 'account/account_edit.html', {})
         else:
             messages.error(request, '비밀번호가 일치하지 않습니다.')
-        
-    data = {}
-    if op == 'u_edit':
-        data['title'] = '계정관리'
-        data['url'] = 'account:info'
-    elif op == 's_edit':
-        data['title'] = '가맹점 관리'
-        data['url'] = 'store:info'
-    elif op == 's_del':
-        data['title'] = '가맹점 관리'
-        data['s_id'] = s_id
-        data['url'] = 'store:info'
-    data['op'] = op
-    return render(request, 'account/identity.html', dict(data=data))
+            return redirect('account:identity')
+    return render(request, 'account/identity.html', {})
     
 # 정보수정
 @login_required

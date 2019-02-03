@@ -18,7 +18,7 @@
     <div id="contents" class="page-header">
         <div class="container">
             <div class="row page-title">
-                <a>계좌관리</a>
+                <a>가맹점 관리</a>
             </div>
         </div>
     </div>
@@ -42,8 +42,8 @@
                                 <hr>
 
                                 <div class="row2 justify-content-center">
-                                    <a href="{% url 'store:edit' %}" class="btn btn-success" style="margin: 0px 5px 0px 5px;">수정</a> 
-                                    <a href="{% url 'store:delete' s_id=store.pk %}" class="btn btn-danger" style="margin: 0px 5px 0px 5px;">삭제</a>
+                                    <a href="{% url 'account:identity' 's_edit' %}" class="btn btn-success" style="margin: 0px 5px 0px 5px;">수정</a>
+                                    <a href="{% url 'account:identity2' op='s_del' s_id=store.id %}" class="btn btn-danger" style="margin: 0px 5px 0px 5px;">삭제</a>
                                     {% if store.status == 2 %}
                                     </form>
                                     <form action="{% url 'store:qrcode' %}" method="POST" target="_blank">

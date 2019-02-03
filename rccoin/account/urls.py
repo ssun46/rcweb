@@ -28,7 +28,8 @@ urlpatterns = [
     path('chk_password/', views.chk_password),
     path('signup/', views.signup, name='signup'),
     path('info/', views.get_myinfo, name='info'),
-    path('identity/', views.identity, name='identity'),
+    path('<str:op>/identity/', views.identity, name='identity'),
+    path('<str:op>/identity/<int:s_id>/', views.identity, name='identity2'),
     path('edit/', views.account_edit, name='edit'),
     path('chg_pwd/', views.change_pwd, name='chg_pwd'),
 ]

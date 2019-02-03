@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', views.index, name='index'),
+    path('<str:op>/done/', views.done, name='done'),
     # path('accounts/', include('django.contrib.auth.urls')),
     path('account/', include('account.urls', namespace='account')),
     path('store/', include('store.urls', namespace='store')),

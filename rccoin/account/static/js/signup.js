@@ -100,6 +100,8 @@ function chk_validate() {
     } else if ( !chk_email() ) {
         return false
     }
+    $("#btn-submit").attr("onClick", "return false");
+    $("#btn-cancel").attr("onClick", "return false");
     return true
 }
 

@@ -14,7 +14,7 @@
     <div id="contents" class="page-header">
         <div class="container">
             <div class="row page-title">
-                <a>계정관리</a>
+                <a>{{ data.title }}</a>
             </div>
         </div>
     </div>
@@ -33,8 +33,15 @@
 
                             <hr> 
                             <!-- Authendicate form -->
-                            <form action="{% url 'account:identity' %}" method="POST">
+                            {% if data.s_id %}
+                            <form action="{% url 'account:identity' data.op %}" method="POST">
+                            {% else %}
+                            <form action="{% url 'account:identity' data.op %}" method="POST">
+                            {% endif %}
                                 {% csrf_token %}
+                                {% if data.s_id %}
+                                    <input type="text" name="s_id" value={{ data.s_id }} hidden />
+                                {% endif %}
                                 <div class="form-group">
                                     <label for="password">비밀번호</label>
                                     <div style="position:relative" id="eye-password-0">
@@ -59,7 +66,7 @@
                                     <button type="submit" class="btn btn-success btn-block">
                                         확인
                                     </button>
-                                    <a href="{% url 'account:info' %}" class="btn btn-danger btn-block">취소</a>
+                                    <a href="{% url data.url %}" class="btn btn-danger btn-block">취소</a>
                                 </div>
                             </form>
 

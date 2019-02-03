@@ -39,7 +39,7 @@
                                 <div class="form-group">
                                     <label for="email">이메일주소</label>
                                     <div style="position:relative" id="eye-password-0">
-                                        <input id="email" type="email" class="form-control" name="email" autocomplete="off" required autofocus style="padding-right: 60px;" />
+                                        <input id="email" type="email" class="form-control" name="email" autocomplete="off" required  autofocus style="padding-right: 60px;" />
                                     </div>
                                     <div class="float-left text-primary">
                                         이메일주소로 아이디를 검색합니다.
@@ -57,7 +57,7 @@
                                                 </div>
                                             {% elif message.tags == "info" %}
                                                 <div class="alert alert-success">
-                                                    <img src="{% static 'img/magnifying-glass.png' %}" style="width: 18px">&nbsp;{{ message }}
+                                                    <img src="{% static 'img/user.png' %}" style="width: 18px">&nbsp;{{ message }}
                                                     <a href="{% url 'account:forget_pwd' %}" class="float-right">비밀번호 찾기</a>
                                                 </div>
                                             {% endif %}

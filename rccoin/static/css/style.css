@@ -59,7 +59,7 @@ a {
     text-decoration: none !important;
 }
 .w-700 {
-    min-width: 700px;
+    width: 700px;
 }
 .page {
     background-color: #fff;
@@ -196,6 +196,11 @@ textarea.form-control {
 }
 .chkbox[type=checkbox]:checked + label, .chkboxAll[type=checkbox]:checked + label {
     background: url(../../static/img/check.png) no-repeat;
+    display: inline-block;
+    height: 30px;
+    margin-right: 10px;
+    vertical-align: middle;
+    cursor: pointer;
 }
 .info {
     font-size: 13px;
@@ -452,7 +457,7 @@ small {
 /* col-md */
 @media (max-width: 765px) {
     .w-700 {
-        min-width: 0px;
+        width: 100%;
     }
     .alert-danger, .alert-success, .text-primary {
         font-size: 0.8rem;
