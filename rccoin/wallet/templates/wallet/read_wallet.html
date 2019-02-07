@@ -29,8 +29,13 @@
                 <div class="col-md card">
                     <div class="card-body">
                         <h5 class="card-subtitle"><a style="color:#00c746;">|</a> 계좌정보</h5>
-
-                        <hr>
+                    </div>
+                </div>
+            </div>
+                  
+            <div class="row justify-content-center page">
+                <div class="col-md card">
+                    <div class="card-body">
 
                         <!-- Extra data -->
                         <data id="from" value="{{ user.username }}" hidden></data>
@@ -45,8 +50,6 @@
                                 &nbsp;/&nbsp;<a href="{% url 'wallet:remittance' %}" class="font-white">송금하기</a>
                             </div>
                         </div>
-
-                        <hr>
 
                     </div>
                 </div>
@@ -79,7 +82,7 @@
                 <table class="table table-filter">
                     <tbody id="history"></tbody>                            
                 </table>
-                <div class="row2 justify-content-center">
+                <div class="justify-content-center">
                     <nav aria-label="page navigation">
                         <ul id="page-area" class="pagination"></ul>
                     </nav>

@@ -16,15 +16,18 @@ Including another URLconf
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from . import views
+from .views import *
 
 app_name = 'store'
 
 urlpatterns = [
-    path('apply/', views.edit_store, name='apply'),
-    path('info/', views.get_myStore, name='info'),
-    path('edit/', views.edit_store, name='edit'),
-    path('<int:s_id>/delete/', views.del_store, name='delete'),
-    path('qrcode/', views.get_qrcode, name='qrcode'),
-    path('list/', views.get_storeList, name='list'),
+    path('apply/', edit_store, name='apply'),
+    path('info/', get_myStore, name='info'),
+    path('edit/', edit_store, name='edit'),
+    path('<int:s_id>/delete/', del_store, name='delete'),
+    path('qrcode/', get_qrcode, name='qrcode'),
+    path('list/', StorePV.as_view(), name='store_list'),
+    path('list/filter/<int:loc>/', filteredStoresPV.as_view(), name='filteredStores'),
+    path('list/detail/<int:store_id>/', detailView, name='filteredStoresDetail')
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

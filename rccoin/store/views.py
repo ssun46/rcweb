@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.views.generic import ListView, DetailView, View
 from .models import Category, Location, Store, Photo
 from account.models import Profile
 import json, datetime
@@ -136,7 +137,87 @@ def del_store(request, s_id):
 def get_qrcode(request):
     store = (Store.objects.filter(Q(representative=request.user) & Q(status=2)))[0]
     return render(request, 'store/store_QRcode.html', dict(store=store))
-
+        
 # 가맹점 리스트
-def get_storeList(request):
-    pass
+class StorePV(ListView):
+    model=Photo
+    paginate_by = 9
+    context_object_name = 'photos'
+    template_name = 'store_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(StorePV, self).get_context_data(**kwargs)
+        paginator = context['paginator']
+        page_numbers_range = 5  # Display only 5 page numbers
+        max_index = len(paginator.page_range)
+        
+        page = self.request.GET.get('page')
+        current_page = int(page) if page else 1
+        self.request.session['page'] = page
+        if 'filter' in self.request.session:
+            del self.request.session['filter']
+        if 'keyword' in self.request.session:
+            del self.request.session['keyword']
+            
+        start_index = int((current_page - 1) / page_numbers_range) * page_numbers_range
+        end_index = start_index + page_numbers_range
+        if end_index >= max_index:
+            end_index = max_index
+        page_range = paginator.page_range[start_index:end_index]
+        context['page_range'] = page_range
+        return context
+
+    def get_queryset(self, **kwargs):
+        queryset = Photo.objects.filter(Q(store__status=2)) # filter returns a list so you might consider skip except part
+        return queryset
+
+# 가맹점 리스트(필터)
+class filteredStoresPV(ListView):
+    model=Photo
+    paginate_by = 9
+    context_object_name = 'photos'
+    template_name = 'store_list.html'
+        
+    def get_context_data(self, **kwargs):
+        context = super(filteredStoresPV, self).get_context_data(**kwargs)
+        paginator = context['paginator']
+        page_numbers_range = 5  # Display only 5 page numbers
+        max_index = len(paginator.page_range)
+
+        page = self.request.GET.get('page')
+        if page:
+            self.request.session['page'] = page
+        else:
+            self.request.session['page'] = 1
+
+        current_page = int(page) if page else 1
+
+        start_index = int((current_page - 1) / page_numbers_range) * page_numbers_range
+        end_index = start_index + page_numbers_range
+        if end_index >= max_index:
+            end_index = max_index
+
+        page_range = paginator.page_range[start_index:end_index]
+        context['page_range'] = page_range
+
+        return context
+
+    def get_queryset(self, **kwargs):
+        loc = self.kwargs.get('loc',None)
+        self.request.session['filter'] = loc
+        if loc == 4:
+            search_query = self.request.GET.get('keyword', None)
+            self.request.session['keyword'] = search_query
+            queryset = Photo.objects.filter(Q(store__name__icontains=search_query) & Q(store__status=2) ) # filter returns a list so you might consider skip except part
+        else:
+            if 'keyword' in self.request.session:
+                del self.request.session['keyword']
+            queryset = Photo.objects.filter(Q(store__status=2) & Q(store__location=loc))
+        return queryset
+
+# 가맹점 가맹점 상세보기
+def detailView (request, store_id=None):
+    store = get_object_or_404(Store, pk=store_id)
+    photo = get_object_or_404(Photo, store_id=store.pk)
+    return render(request, 'store/store_list_detail.html', dict(store=store, photo=photo))
+

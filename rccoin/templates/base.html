@@ -46,19 +46,19 @@
                             소개
                         </a>
                         <div class="dropdown-menu" aria-labelledby="intro">
-                            <a class="dropdown-item" href="#">RCcoin 소개</a>
-                            <a class="dropdown-item" href="#">이용안내</a>
+                            <a class="dropdown-item" href="{% url 'intro' %}">RC코인이란?</a>
+                            <a class="dropdown-item" href="{% url 'guide' %}">이용안내</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">오시는 길<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'map' %}">오시는 길<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="info" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             정보마당
                         </a>
                         <div class="dropdown-menu" aria-labelledby="info">
-                            <a class="dropdown-item" href="{% url 'done' op='logout' %}">공지사항</a>
+                            <a class="dropdown-item" href="{% url 'info:list' %}">공지사항</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -66,12 +66,14 @@
                             커뮤니티
                         </a>
                         <div class="dropdown-menu" aria-labelledby="community">
-                            <a class="dropdown-item" href="#">가맹게시판</a>
-                            <a class="dropdown-item" href="#">자유게시판</a>
+                            <a class="btn_board_type_1 dropdown-item" href="{% url 'board:list' %}">가맹게시판</a>
+                            <input type="hidden" id="board_type_1" value="1">
+                            <a class="btn_board_type_2 dropdown-item" href="{% url 'board:list' %}">회원게시판</a>
+                            <input type="hidden" id="board_type_2" value="2">
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">가맹점</a>
+                        <a class="nav-link" href="{% url 'store:store_list' %}?page=1">가맹점</a>
                     </li>
                     <li class="nav-link d-none d-lg-block">|</li>
                     <div class="dropdown-divider"></div>
@@ -127,8 +129,8 @@
                         <div class="card-title">
                             <h5><strong>소개</strong></h5>
                             <ul class="card-text">
-                                <li><a href="#">RC코인이란?</a></li>
-                                <li><a href="#">이용안내</a></li>
+                                <li><a href="{% url 'intro' %}">RC코인이란?</a></li>
+                                <li><a href="{% url 'guide' %}">이용안내</a></li>
                             </ul>
                             <br class="d-block d-md-none">
                         </div>
@@ -156,9 +158,9 @@
                         <div class="card-title">
                             <h5><strong>가맹점</strong></h5>
                             <ul class="card-text">
-                                <li><a href="#">울릉읍</a></li>
-                                <li><a href="#">북면</a></li>
-                                <li><a href="#">서면</a></li>
+                                <li><a href="{% url 'store:filteredStores' 1 %}">울릉읍</a></li>
+                                <li><a href="{% url 'store:filteredStores' 3 %}">북면</a></li>
+                                <li><a href="{% url 'store:filteredStores' 2 %}">서면</a></li>
                             </ul>
                         </div>
                     </div>

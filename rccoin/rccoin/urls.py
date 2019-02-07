@@ -21,13 +21,20 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('accounts/', include('django.contrib.auth.urls')),
 
     path('', views.index, name='index'),
     path('<str:op>/done/', views.done, name='done'),
-    # path('accounts/', include('django.contrib.auth.urls')),
-    # path('operate/', include('operate.urls', namespace='operate')),
+    
+    path('intro/', views.intro, name='intro'),
+    path('guide/', views.guide, name='guide'),
+    path('map/', views.map, name='map'),
+
+    path('operate/', include('operate.urls', namespace='operate')),
     path('account/', include('account.urls', namespace='account')),
     path('store/', include('store.urls', namespace='store')),
     path('wallet/', include('wallet.urls', namespace='wallet')),
+    path('info/', include('info.urls', namespace='info')),
+    path('board/', include('board.urls', namespace='board')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

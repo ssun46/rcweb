@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from django.template import loader
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -74,3 +77,34 @@ def done(request, op=None):
         msg['msg'] = '가맹점이 삭제에 실패했습니다.'
         msg['url'] = 'store:info'
     return render(request, 'done.html', dict(msg=msg))
+
+# 소개 페이지
+def intro(request):
+    template = loader.get_template('intro.html')
+    context = {
+        'latest_question_list': "test",
+    }
+    return HttpResponse(template.render(context, request))
+
+# 이용안내 페이지
+def guide(request):
+    template = loader.get_template('guide.html')
+    context = {
+        'latest_question_list': "test",
+    }
+    return HttpResponse(template.render(context, request))
+
+# 오시는길 페이지
+def map(request):
+    template = loader.get_template('map.html')
+    context = {
+        'latest_question_list': "test",
+    }
+    return HttpResponse(template.render(context, request))
+
+# check logged user
+class LoginRequiredMixin(object):
+    @classmethod
+    def as_view(cls, **initkwargs):
+        view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
+        return login_required(view)

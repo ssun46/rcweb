@@ -67,12 +67,12 @@ a {
     margin-bottom: 10px;
     padding-top: 20px;
     padding-bottom: 20px;
-    border: 1px solid #d8d9dc;
+    border: 1px solid #dee2e6;
 }
 .page-header {
     height: 75px;
     background-color: #fff;
-    border-bottom: 1px solid #d8d9dc;
+    border-bottom: 1px solid #dee2e6;
 }
 .page-title {
     padding-top: 36px;
@@ -150,8 +150,6 @@ ul.card-text, .card-text > li {
 .card-subtitle {
     font-weight: 600;
     margin-top: 10px;
-    margin-left: 10px;
-    margin-right: -10px;
 }
 .card-body {
     padding: 0rem;
@@ -163,9 +161,6 @@ ul.card-text, .card-text > li {
 a.float-right, a.float-left {
     font-size: 0.8rem;
     color: #000;
-}
-a.float-left {
-    color:
 }
 a.float-right {
     font-size: 0.9rem;

@@ -5,7 +5,7 @@ from .models import Cancellation
 
 class CancellationAdmin(admin.ModelAdmin):
     model = Cancellation
-    list_display = ['s_id', 'txHash',]
+    list_display = ['s_id', 'txHash', 'amount', 'comment', 'removed_date',]
     verbose_name_plural = 'Cancellation'
 
 admin.site.register(Cancellation, CancellationAdmin)

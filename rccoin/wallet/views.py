@@ -121,6 +121,27 @@ def payment(request):
         msg = response.json()
         # 결제 결과 처리
         if msg['result'] == 'success':
+            
+            ###################차트 데이터####################
+            user = get_object_or_404(User, id=request.user.pk)
+
+            age = int(datetime.datetime.now().year) - int(user.profile.birth_year) 
+            gender = user.profile.gender
+            location = store.location
+            category = store.category
+            tx_id = msg['tx_id']
+
+            chart = ChartStat()
+            chart.age = age
+            chart.gender = gender
+            chart.store = store
+            chart.amount = amount
+            chart.location = location
+            chart.category = category
+            chart.tx_id = tx_id['_transaction_id']
+
+            chart.save()
+            ##################################################
             return redirect('/payment1/done/')
         else:
             return redirect('/payment2/done/')
@@ -307,10 +328,13 @@ def cancel(request):
             canceled = Cancellation()
             canceled.s_id = Store.objects.filter(Q(representative=request.user.pk))[0]
             canceled.txHash = tx
+            canceled.amount = amount
+            canceled.comment = comment
+            canceled.removed_date = today
             canceled.save()
-        
-            # chart = ChartStat.objects.get(tx_id = tx)
-            # chart.delete()
+
+            chart = ChartStat.objects.get(tx_id = tx)
+            chart.delete()
             return redirect('/cancel1/done/')
 
         return redirect('/cancel2/done/')
