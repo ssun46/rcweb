@@ -4,8 +4,7 @@ function chk_target() {
     let target = $("#target").val()
     msg = ""
     if ( target.length < 1 ) {
-        msg = '받는 계정을 입력해주세요.'
-        $("#target").prop("focus", true)
+        msg = '받는 계정을 입력해주세요.
     } else if ( target == $("#to").val() ) {
         id_isValidated = false
         msg = "자신에게는 송금할 수 없습니다."
@@ -55,6 +54,7 @@ function chk_validate() {
     var balance = parseInt($("#balance").val().replace(/[^0-9]/g, '')) || 0;
     msg = ""
     if ( !id_isValidated ) {
+        $("#target").focus()
         msg = '받는 계정을 조회해주세요.'
     } else if ( amount == 0 ) {
         $("#point").focus()
@@ -66,6 +66,7 @@ function chk_validate() {
         $("#agree").focus()
         msg = '송금 약관에 동의해 주세요.'
     } else if ( !chk_password() ) {
+        $("#password").focus()
         msg = '비밀번호가 일치하지 않습니다.'
     } else {
         $("#btn-submit").attr("onClick", "return false");
@@ -89,7 +90,6 @@ function getRestBalance() {
     // console.log("balance:",balance,"amount:",amount,"restBalance:",restBalance)
     if (restBalance < 0 ){
         $("#point").focus()
-        alert("송금액이 보유잔액을 초과하였습니다. 다시 입력해주세요.") 
         restBalanceCheck = 0;
         //   console.log("restBalanceCheck:",restBalanceCheck)
         $("#rest_balance").attr("value", numberWithCommas(balance))

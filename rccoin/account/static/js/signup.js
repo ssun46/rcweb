@@ -53,6 +53,9 @@ function chk_username() {
             }        
         });
     }
+    if( !id_isValidated ) {
+        $("#username").focus()
+    }
     alert(msg)
 }
 
@@ -71,6 +74,7 @@ function chk_password() {
     // } else {
     //     return true
     // }
+    // $("#password1").focus()
     // alert(msg)
     // return false
     return true
@@ -87,6 +91,7 @@ function chk_email() {
     } else {
         return true
     }
+    $("#email").focus()
     alert(msg)
     return false
 }

@@ -139,7 +139,7 @@
                         <div class="card-title">
                             <h5><strong>정보마당</strong></h5>
                             <ul class="card-text">
-                                <li><a href="#">공지사항</a></li>
+                                <li><a href="{% url 'info:list' %}">공지사항</a></li>
                             </ul>
                             <br class="d-block d-md-none">
                         </div>
@@ -158,9 +158,9 @@
                         <div class="card-title">
                             <h5><strong>가맹점</strong></h5>
                             <ul class="card-text">
-                                <li><a href="{% url 'store:filteredStores' 1 %}">울릉읍</a></li>
-                                <li><a href="{% url 'store:filteredStores' 3 %}">북면</a></li>
-                                <li><a href="{% url 'store:filteredStores' 2 %}">서면</a></li>
+                                <li><a href="{% url 'store:filteredStores' 3 %}?page==1">북면</a></li>
+                                <li><a href="{% url 'store:filteredStores' 2 %}?page=1">서면</a></li>
+                                <li><a href="{% url 'store:filteredStores' 1 %}?page=1">울릉읍</a></li>
                             </ul>
                         </div>
                     </div>

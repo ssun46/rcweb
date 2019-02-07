@@ -152,6 +152,7 @@ class StorePV(ListView):
         max_index = len(paginator.page_range)
         
         page = self.request.GET.get('page')
+        self.request.session['page'] = page
         current_page = int(page) if page else 1
         self.request.session['page'] = page
         if 'filter' in self.request.session:

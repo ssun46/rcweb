@@ -132,7 +132,7 @@ def chk_password(request):
 # 회원가입
 @csrf_exempt
 def signup(request):
-    success = 0
+    success = 1
     if request.method == 'POST':
         key = request.POST.get('username', None)
         if key:
@@ -170,8 +170,6 @@ def signup(request):
                     msg = response.json()
                     if msg['result'] == 'success':
                         success = 2
-                    else:
-                        success = 1
 
                 user = User()
                 user.username = request.POST.get('username', None)

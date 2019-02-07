@@ -18,11 +18,13 @@ function check_password() {
 
 function chk_validate() {
     var msg = ""
-    if ( !check_password() ) {
-        msg = "비밀번호가 일치하지 않습니다."
-    } else if ( !$("#agree").is(":checked") ) {
+    if ( !$("#agree").is(":checked") ) {
+        $("#agree").focus()
         msg = "약관 동의 후, 결제취소가 가능합니다."
-    } else {
+    } else if ( !check_password() ) {
+        $("#password").focus()
+        msg = "비밀번호가 일치하지 않습니다."
+    }  else {
         $("#btn-submit").attr("onClick", "return false");
         $("#btn-cancel").attr("onClick", "return false");
         return true

@@ -11,7 +11,7 @@ function chk_password() {
     // } else if (! pattern.test($("#password1").val()) ) {
     //     $("#password1").focus()
     //     msg = "새 비밀번호는 알파벳 대소문자, 숫자, 특수문자(!@#$)를 최소 하나씩 포함해야합니다."
-    // } else if ( $("#password").val() == $("#password2").val() ) {
+    // } else if ( $("#password").val() == $("#password1").val() ) {
     //     $("#password1").focus()
     //     msg = "현재 비밀번호와 같은 비밀번호는 사용할 수 없습니다."
     // } else if ( $("#password1").val() != $("#password2").val() ) {
