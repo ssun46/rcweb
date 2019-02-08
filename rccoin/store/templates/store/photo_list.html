@@ -78,10 +78,10 @@
                             </div>
 
                             <div class="col-lg-4 col-md-12 col-sm-12 btn-group margin-top">
-                                <a href="{% url 'store:store_list' %}" class="btn btn-primary">전체지역</a>
-                                <a href="{% url 'store:filteredStores' 3 %}" class="btn btn-success" />북면</a>
-                                <a href="{% url 'store:filteredStores' 2 %}" class="btn btn-warning" />서면</a>
-                                <a href="{% url 'store:filteredStores' 1 %}" class="btn btn-danger" />울릉읍</a>
+                                <a href="{% url 'store:store_list' %}?page=1" class="btn btn-primary">전체지역</a>
+                                <a href="{% url 'store:filteredStores' 3 %}?page=1" class="btn btn-success" />북면</a>
+                                <a href="{% url 'store:filteredStores' 2 %}?page=1" class="btn btn-warning" />서면</a>
+                                <a href="{% url 'store:filteredStores' 1 %}?page=1" class="btn btn-danger" />울릉읍</a>
                             </div>
                         </div>
                     </div>

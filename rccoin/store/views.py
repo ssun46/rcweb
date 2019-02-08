@@ -154,7 +154,6 @@ class StorePV(ListView):
         page = self.request.GET.get('page')
         self.request.session['page'] = page
         current_page = int(page) if page else 1
-        self.request.session['page'] = page
         if 'filter' in self.request.session:
             del self.request.session['filter']
         if 'keyword' in self.request.session:

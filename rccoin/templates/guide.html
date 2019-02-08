@@ -5,6 +5,39 @@
 {% endblock head %}
 
 {% block css %}
+
+.profile-head .nav-tabs{
+    margin-bottom: 5%;
+}
+.profile-head .nav-tabs .nav-link{
+    font-weight:650;
+    color: #495057;
+    border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+    /* background-color: #7ac55d; */
+    border: none;
+    border-bottom:2px solid #00c746;
+}
+.profile-work p{
+    color: #818182;
+    font-weight: 650;
+}
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 650;
+}
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 650;
+}
+.profile-tab p{
+    font-weight: 650;
+    color: #0062cc;
+}
 {% endblock css %}
 {% block body %}
 
@@ -17,7 +50,6 @@
         </div>
     </div>
     
-    <!-- Filter button -->
     <div id="contents">
         <div class="container">
             
@@ -33,8 +65,63 @@
             <div class="row justify-content-center page">
                 <div class="col-md card">
                     <div class="card-body">
-                        <!-- Guide -->
+                        <!-- Menu tab -->
+                        <div class="row profile-head">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="guide_store-tab" data-toggle="tab" href="#guide_store" role="tab" aria-controls="guide_store" aria-selected="false">가맹점 신청</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="guide_qrcode-tab" data-toggle="tab" href="#guide_qrcode" role="tab" aria-controls="guide_qrcode" aria-selected="false">QR code 생성</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="guide_remittance-tab" data-toggle="tab" href="#guide_remittance" role="tab" aria-controls="guide_remittance" aria-selected="false">송금하기</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="guide_payment-tab" data-toggle="tab" href="#guide_payment" role="tab" aria-controls="guide_payment" aria-selected="false">결제하기</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="guide_cancel_payment-tab" data-toggle="tab" href="#guide_cancel_payment" role="tab" aria-controls="guide_cancel_payment" aria-selected="false">결제취소</a>
+                                </li>
+                            </ul>
+                        </div>
 
+                        <!-- Contents -->
+                        
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="guide_store" role="tabpanel" aria-labelledby="guide_store-tab">
+                                <div class="row justify-content-center">
+                                    가맹점신청
+                                </div>
+                                <div class="text-left">
+                                    왼쪽정렬
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade show" id="guide_qrcode" role="tabpanel" aria-labelledby="guide_qrcode-tab">
+                                <div class="row justify-content-center">
+QR코드
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade show" id="guide_remittance" role="tabpanel" aria-labelledby="guide_remittance-tab">
+                                <div class="row justify-content-center">
+송금하기
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade show" id="guide_payment" role="tabpanel" aria-labelledby="guide_payment-tab">
+                                <div class="row justify-content-center">
+결제하기
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade show" id="guide_cancel_payment" role="tabpanel" aria-labelledby="guide_cancel_payment-tab">
+                                <div class="row justify-content-center">
+결제 취소
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

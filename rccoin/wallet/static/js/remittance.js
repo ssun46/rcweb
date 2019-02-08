@@ -4,7 +4,7 @@ function chk_target() {
     let target = $("#target").val()
     msg = ""
     if ( target.length < 1 ) {
-        msg = '받는 계정을 입력해주세요.
+        msg = "받는 계정을 입력해주세요."
     } else if ( target == $("#to").val() ) {
         id_isValidated = false
         msg = "자신에게는 송금할 수 없습니다."
