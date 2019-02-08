@@ -18,7 +18,7 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 class BoardLV(ListView):
-
+    
     def get_queryset(self):
         if self.request.user.username == '':
             queryset = Board.objects.filter(category=1)
@@ -132,7 +132,6 @@ def get_comment(request):
     return HttpResponse(json_format, content_type="application/json:charset=UTF-8")
 
 def chg_board(request):
-    print("defdef")
     board_type = request.GET.get('board_type', )
     input_page = request.GET.get('page', )
     category = request.GET.get('category')

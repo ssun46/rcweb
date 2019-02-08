@@ -19,7 +19,7 @@ class Board(models.Model):
     status = models.CharField('STATUS', max_length=1, default='Y')
 
     class Meta:
-        ordering = ('-modify_date',)
+        ordering = ('-create_date',)
     def get_absolute_url(self):
         return reverse("board:read", args=(self.pk,))
 
