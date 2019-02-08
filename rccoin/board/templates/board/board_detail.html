@@ -9,6 +9,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+<script src="{% static 'js/board.js' %}"></script>
 
 <style>
     .btn{
@@ -76,9 +77,9 @@
             <div style="margin-left:1px">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="row nav-item" style="margin-left: 1px; margin-right: 1px; margin-bottom: 10px; width: 100%">
-                        <a id="btn_board_type_1" class="nav-link btn_board_type_1"  style="min-width: 75px" onclick="back_to_list()"  href="{% url 'board:list' %}">가맹 게시판</a>
+                        <a id="btn_board_type_1" class="nav-link btn_board_type_1"  style="min-width: 75px" onclick="back_to_list(1)"  href="{% url 'board:list' %}">가맹 게시판</a>
                         <input type="hidden" id="board_type_1" value="1">&nbsp;
-                        <a id="btn_board_type_2" class="nav-link btn_board_type_2"  style="min-width: 75px" onclick="back_to_list()"  href="{% url 'board:list' %}">회원 게시판</a>
+                        <a id="btn_board_type_2" class="nav-link btn_board_type_2"  style="min-width: 75px" onclick="back_to_list(2)"  href="{% url 'board:list' %}">회원 게시판</a>
                         <input type="hidden" id="board_type_2" value="2">
                     </li>
                 </ul>

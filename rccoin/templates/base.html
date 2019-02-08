@@ -66,9 +66,9 @@
                             커뮤니티
                         </a>
                         <div class="dropdown-menu" aria-labelledby="community">
-                            <a class="btn_board_type_1 dropdown-item" href="{% url 'board:list' %}">가맹게시판</a>
+                            <a class="btn_board_type_1 dropdown-item" onclick="back_to_list(1)" href="{% url 'board:list' %}">가맹게시판</a>
                             <input type="hidden" id="board_type_1" value="1">
-                            <a class="btn_board_type_2 dropdown-item" href="{% url 'board:list' %}">회원게시판</a>
+                            <a class="btn_board_type_2 dropdown-item" onclick="back_to_list(2)" href="{% url 'board:list' %}">회원게시판</a>
                             <input type="hidden" id="board_type_2" value="2">
                         </div>
                     </li>
@@ -179,6 +179,7 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'bootstrap-4.2.1-dist/js/bootstrap.js' %}"></script>
+    <script src="rccoin\board\static\js\board.js"></script>
 
     {% block js %} {% endblock js %}
   

@@ -49,7 +49,6 @@ function btn_click_ctl(){
 }
 
 function chg_board(board_type, page){
-
         ctl_cookie(board_type)
 
         var category = ''
@@ -168,13 +167,13 @@ function chg_board(board_type, page){
         })
     }
 
-    function back_to_list(){
-
+    function back_to_list(board_type){
         var setCookie = function(name, value, exp) {
             var date = new Date();
             date.setTime(date.getTime() + exp*24*60*60*1000);
             document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
           };
-          setCookie('from', "not_intro", 7)
+          setCookie('from', "not_intro", 7);
+          setCookie('current_board', board_type, 7);
 
     }

@@ -18,7 +18,7 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 class BoardLV(ListView):
-
+    
     def get_queryset(self):
         if self.request.user.username == '':
             queryset = Board.objects.filter(category=1)
@@ -82,7 +82,8 @@ def board_edit(request, board_id=None):
             board = form.save(commit=False)
             board.board_id = Board(board_id)
             board.writer = User(user)
-            board.category = user_type
+            if not board_id:
+                board.category = user_type
             board.save()
             # request 없이 페이지 이동만 한다.
         return redirect('board:list')
@@ -132,7 +133,6 @@ def get_comment(request):
     return HttpResponse(json_format, content_type="application/json:charset=UTF-8")
 
 def chg_board(request):
-    print("defdef")
     board_type = request.GET.get('board_type', )
     input_page = request.GET.get('page', )
     category = request.GET.get('category')
