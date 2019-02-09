@@ -43,7 +43,11 @@ sup {
 }
 ol.guide>li{
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+}
+ol.guide img {
+    max-width: 800px;
+    border: 1px solid #000;
 }
 {% endblock css %}
 {% block body %}
@@ -105,6 +109,7 @@ ol.guide>li{
                                 <ol class="guide">
                                     <img src="{% static 'img/guide/store_1.jpg' %}" style="width: 100%; margin-left: -20px;">
                                     <li>상단 메인 메뉴에서 가맹점 신청 버튼을 선택합니다.</li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/store_2.jpg' %}" style="width: 100%; margin-left: -20px;">
                                     <li>폼 양식에 맞춰 값을 입력 후 신청 버튼을 선택합니다.
                                         <ul style="list-style-type: circle">
@@ -120,6 +125,7 @@ ol.guide>li{
                                             <li>소개<sup>(필수)</sup> : 간략한 가맹점 소개</li>
                                         </ul>
                                     </li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/store_3.jpg' %}" style="width: 100%; margin-left: -20px;">
                                     <li>신청된 가맹점 정보를 확인 할 수 있습니다.
                                         <ul style="color: red;">
@@ -139,8 +145,10 @@ ol.guide>li{
                                 <ol class="guide">
                                     <img src="{% static 'img/guide/cancel_1.jpg' %}" style="width: 100%; margin-left: -20px;">
                                     <li>상단 메인 메뉴에서 가맹점 관리 버튼을 선택합니다.</li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/store_5.jpg' %}" style="width: 100%; margin-left: -20px;">
                                     <li>QR코드 버튼을 선택합니다.</li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/store_6.jpg' %}" style="width: 100%; margin-left: -20px;">
                                     <li>가맹점 QR코드를 새창에서 확인할 수 있습니다.
                                         <ul style="color: red;">
@@ -159,8 +167,10 @@ ol.guide>li{
                                 <ol class="guide">
                                     <img src="{% static 'img/guide/remittance_1.jpg' %}" style="width: 100%; margin-left: -20px;">
                                     <li>상단 메인 메뉴에서 계좌관리 버튼을 선택합니다.</li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/remittance_2.jpg' %}" style="width: 100%; margin-left: -20px;">
                                     <li>화면에서 송금하기를 선택합니다.</li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/remittance_3.jpg' %}" style="width: 100%; margin-left: -20px;">
                                     <li>폼 양식에 맞춰 값을 입력 후 송금 버튼을 선택합니다.
                                         <ul style="list-style-type: circle">
@@ -174,6 +184,7 @@ ol.guide>li{
                                             <li>약관동의<sup>(필수)</sup> : 송금 책임 동의</li>
                                         </ul>
                                     </li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/remittance_4.jpg' %}" style="width: 100%; margin-left: -20px;">
                                     <li>송금 완료 메시지 확인 할 수 있습니다.</li>
                                 </ol>
@@ -189,16 +200,20 @@ ol.guide>li{
                                 <ol class="guide">
                                     <img src="{% static 'img/guide/payment_1.jpg' %}" style="width: 100%; max-width: 400px; margin-left: -20px;">
                                     <li>상단 메인 메뉴에서 계좌관리 버튼을 선택합니다.</li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/payment_2.jpg' %}" style="width: 100%; max-width: 400px; margin-left: -20px;">
                                     <li>화면에서 결제하기를 선택합니다.</li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/payment_3.jpg' %}" style="width: 100%; max-width: 400px; margin-left: -20px;">
                                     <li>카메라가 열리면 가맹점의 QR코드를 촬영합니다.</li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/payment_4.jpg' %}" style="width: 100%; max-width: 400px; margin-left: -20px;">
                                     <li>촬영 후, 사용하기를 선택합니다.
                                         <ul style="color: red;">
                                             <li>QR코드 인식 실패시 다시 촬영을 시도해 주세요.</li>
                                         </ul>
                                     </li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/payment_5.jpg' %}" style="width: 100%; max-width: 400px; margin-left: -20px;">
                                     <li>폼 양식에 맞춰 값을 입력 후 결제 버튼을 선택합니다.
                                         <ul style="list-style-type: circle">
@@ -207,6 +222,7 @@ ol.guide>li{
                                             <li>약관동의<sup>(필수)</sup> : 결제 책임 동의</li>
                                         </ul>
                                     </li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/payment_6.jpg' %}" style="width: 100%; max-width: 400px; max-witdh:margin-left: -20px;">
                                     <li>결제 완료 메시지 확인 할 수 있습니다.</li>
                                 </ol>
@@ -221,8 +237,10 @@ ol.guide>li{
                                 <ol class="guide">
                                     <img src="{% static 'img/guide/cancel_1.jpg' %}" style="width: 100%; margin-left: -20px;">
                                     <li>상단 메인 메뉴에서 가맹점관리 버튼을 선택합니다.</li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/cancel_2.jpg' %}" style="width: 100%; margin-left: -20px;">
                                     <li>거래 이력 중 취소할 결제의 취소 버튼을 선택합니다.</li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/cancel_3.jpg' %}" style="width: 100%; margin-left: -20px;">
                                     <li>폼 양식에 맞춰 값을 입력 후 확인 버튼을 선택합니다.
                                         <ul style="list-style-type: circle">
@@ -231,6 +249,7 @@ ol.guide>li{
                                             <li>약관동의<sup>(필수)</sup> : 결제취소 책임 동의</li>
                                         </ul>
                                     </li>
+                                    <hr style="margin-left: -20px; margin-right: 20px; border-top: 1px solid #ddd;">
                                     <img src="{% static 'img/guide/cancel_4.jpg' %}" style="width: 100%; margin-left: -20px;">
                                     <li>결제취소 완료 메시지 확인 할 수 있습니다.</li>
                                 </ol>
