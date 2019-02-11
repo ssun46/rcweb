@@ -69,8 +69,16 @@ function chk_validate() {
         $("#password").focus()
         msg = '비밀번호가 일치하지 않습니다.'
     } else {
-        $("#btn-submit").attr("onClick", "return false");
-        $("#btn-cancel").attr("onClick", "return false");
+        $("#btn-submit").attr("onClick", "return false")
+        $("#btn-cancel").attr("onClick", "return false")
+        $("body").loadingModal({
+            position: "auto",
+            color: "#fff",
+            opacity: "0.7",
+            backgroundColor: "rgb(0,0,0)",
+            animation: "fadingCircle",
+            text: "Loading..."
+        })
         return true
     }
     alert(msg)

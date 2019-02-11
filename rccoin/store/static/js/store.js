@@ -91,6 +91,14 @@ function chk_validate() {
     } else if( description == "" ) {
         msg = "가맹점 설명을 입력해주세요."
     } else {
+        $("body").loadingModal({
+            position: "auto",
+            color: "#fff",
+            opacity: "0.7",
+            backgroundColor: "rgb(0,0,0)",
+            animation: "fadingCircle",
+            text: "Loading..."
+        })
         return true
     }
     alert(msg)

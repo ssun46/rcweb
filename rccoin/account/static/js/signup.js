@@ -105,8 +105,20 @@ function chk_validate() {
     } else if ( !chk_email() ) {
         return false
     }
-    $("#btn-submit").attr("onClick", "return false");
-    $("#btn-cancel").attr("onClick", "return false");
+    $("#btn-submit").attr("onClick", "return false")
+    $("#btn-cancel").attr("onClick", "return false")
+    $("body").loadingModal({
+        position: "auto",
+        color: "#fff",
+        opacity: "0.7",
+        backgroundColor: "rgb(0,0,0)",
+        animation: "fadingCircle",
+        text: "Loading..."
+    })
+    // hide the loading modal
+    // $('body').loadingModal('hide');
+    // destroy the plugin
+    // $('body').loadingModal('destroy');
     return true
 }
 
