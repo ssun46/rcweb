@@ -289,7 +289,7 @@ class ChartData(APIView):
         data_list1 = ChartStat.objects.values_list('gender', flat=True).filter(store__location=location)
         default_items = [0, 0]
         for data in data_list1:
-            if data == 1:
+            if data == '1':
                 default_items[0] += 1
             else : default_items[1] += 1
 
