@@ -356,7 +356,7 @@ def check_length(string, max_len):
         result = str(string)
     return result
 
-host = "http://210.107.78.166:3000/"
+host = "http://127.0.0.1:3000/"
 
 ## query
 def get_notices():
@@ -376,7 +376,12 @@ def get_notices():
 def get_publish_amount():
     get_publish_url = host + "get_total_publish"
     publish_data = {}
-    publish_amount = 0
+
+    publish_amout_url = host + "get_account"
+    params = {'user_id' : "admin"}
+    response = requests.get(publish_amout_url, params=params)
+    res = response.json()
+    publish_amount = (int(res['value']))
 
     try:
         response = requests.get(get_publish_url)
@@ -385,7 +390,6 @@ def get_publish_amount():
         data_list = []
         for datas in json_format:
             data = {}
-            publish_amount += datas['balance']
             data['tx_id'] = str(datas['tx_id'])
             data['amount'] = datas['amount']
             data['person'] = datas['trader']
